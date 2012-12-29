@@ -2,22 +2,16 @@
 # Imports (using coffee-toaster directives)
 # ----------------------------------------------------
 
-root = window ? exports
-
 #<< common/bindings
-b = bindings
-
 #<< common/oscilloscope
-
 #<< common/sim/linear_compartment
-LinearCompartmentModel = common.sim.LinearCompartmentModel
-
 #<< common/sim/stim
-SquareWavePulse = common.sim.SquareWavePulse
-
 #<< common/util
-util = root.util
 
+# Import a few names into this namespace for convenience
+LinearCompartmentModel = common.sim.LinearCompartmentModel
+SquareWavePulse = common.sim.SquareWavePulse
+ViewModel = common.ViewModel
 
 
 # ----------------------------------------------------
@@ -31,10 +25,13 @@ initializeSimulation = () ->
     # ------------------------------------------------------
 
     # Build a linear compartment model with 4 compartments
-    sim = new LinearCompartmentModel(10)
+    sim = LinearCompartmentModel(10).R_a(10.0)
 
     # Build a square-wave pulse object (to connect to the compartment 0)
-    pulse = new SquareWavePulse([0.0, 3.0], 15.0)
+    pulse = SquareWavePulse().interval([0.0, 3.0])
+                             .amplitude(15.0)
+                             .I_stim(sim.compartments[0].I_ext)
+                             .t(sim.t)
 
 
     # ------------------------------------------------------
@@ -43,23 +40,15 @@ initializeSimulation = () ->
     # ------------------------------------------------------
 
     # Build a view model obj to manage KO bindings
-    viewModel = {}
+    vm = new ViewModel()
 
 
     # Connect up the compartment model
-    b.exposeOutputBindings(sim, ['t', 'v0', 'v1', 'v2', 'v3', 'I0', 'I1', 'I2', 'I3'], viewModel)
-    b.exposeInputBindings(sim, ['R_a'], viewModel)
-    #b.bindInput(sim, 'R_a', viewModel, 'R_a', -> alert('blah'))
-
-    # Connect up the stimulator
-    b.bindOutput(pulse, 'I_stim', viewModel, 'I_stim')
-    b.bindInput(pulse, 't', viewModel, 't', -> pulse.update())
-    b.bindInput(sim.compartments[0], 'I_ext', viewModel, 'I_stim')
-
+    vm.inheritProperties(sim, ['t', 'v0', 'v1', 'v2', 'v3', 'I0', 'I1', 'I2', 'I3', 'R_a'])
 
     # Set the html-based Knockout.js bindings in motion
     # This will allow templated 'data-bind' directives to automagically control the simulation / views
-    ko.applyBindings(viewModel)
+    ko.applyBindings(vm)
 
     # ------------------------------------------------------
     # Oscilloscopes!
@@ -67,9 +56,9 @@ initializeSimulation = () ->
 
     # # Make an oscilloscope and attach it to the svg
     oscopes = []
-    oscopes[0] = oscilloscope('#art svg', '#oscope1').data(-> [sim.t, sim.v1])
-    oscopes[1] = oscilloscope('#art svg', '#oscope2').data(-> [sim.t, sim.v2])
-    oscopes[2] = oscilloscope('#art svg', '#oscope3').data(-> [sim.t, sim.v3])
+    oscopes[0] = oscilloscope('#art svg', '#oscope1').data(-> [sim.t(), sim.v1()])
+    oscopes[1] = oscilloscope('#art svg', '#oscope2').data(-> [sim.t(), sim.v2()])
+    oscopes[2] = oscilloscope('#art svg', '#oscope3').data(-> [sim.t(), sim.v3()])
 
     # # Float a div over a rect in the svg
     util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
@@ -83,13 +72,11 @@ initializeSimulation = () ->
         # Update the simulation
         sim.step()
 
-        # update the bindings
-        b.update()
 
         # Tell the oscilloscope to plot
         scope.plot() for scope in oscopes
 
-        if sim.t >= maxSimTime
+        if sim.t() >= maxSimTime
             sim.reset()
             scope.reset() for scope in oscopes
 
