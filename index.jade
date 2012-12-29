@@ -1,0 +1,42 @@
+html
+
+  head
+
+    // script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js')
+    // script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js')
+    script(src='http://mbostock.github.com/d3/d3.js')
+    script(src='js/ap-debug.js')
+
+    link(rel='stylesheet', type='text/css', href='css/jquery-ui-1.9.2.custom.css')
+    link(rel='stylesheet', type='text/css', href='css/hh.css')
+
+  body
+
+    #stage
+      #art
+
+    #floaty.properties-pane
+      label Axial Resistance:
+        span(data-bind='text: R_a')
+      br
+      div(data-bind="slider: R_a, sliderOptions: {min: 0.5, max: 30, range: false, step: 0.5}")
+
+
+    #properties
+      ul
+        li
+          label R_a:
+            input(data-bind='text: R_a')
+
+        li
+          label v1:
+            span(data-bind='text: v1')
+
+        li
+          label Current:
+            input(data-bind='value: I1')
+
+        li
+          label Membrane Potential:
+            input(data-bind='value: v1')
+
