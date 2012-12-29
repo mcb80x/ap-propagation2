@@ -5,15 +5,15 @@
 root = window ? exports
 
 #<< common/bindings
-b = root.bindings
+b = bindings
 
 #<< common/oscilloscope
 
 #<< common/sim/linear_compartment
-LinearCompartmentModel = root.LinearCompartmentModel
+LinearCompartmentModel = common.sim.LinearCompartmentModel
 
 #<< common/sim/stim
-SquareWavePulse = root.SquareWavePulse
+SquareWavePulse = common.sim.SquareWavePulse
 
 #<< common/util
 util = root.util
