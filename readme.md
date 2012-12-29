@@ -1,4 +1,8 @@
-Some experiments in building a Hodkin-Huxley simulator for mcb80x.
+# MCB80x Action Potential Propagation Demo
+
+Some experiments in building an AP propagation simulator for mcb80x.
+
+Live demo: [mcb80x.github.com/ap-propagation](http://mcb80x.github.com/ap-propagation)
 
 # Dependencies:
 
@@ -10,7 +14,6 @@ Some experiments in building a Hodkin-Huxley simulator for mcb80x.
 npm install -g jade
 npm install -g coffee-script
 npm install -g coffee-toaster
-
 ```
 
 # Building
