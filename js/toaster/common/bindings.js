@@ -1,5 +1,5 @@
 (function() {
-  var bindings, hideElement, root, showElement;
+  var hideElement, root, showElement, svgbind;
 
   hideElement = function(el) {
     return el.attr('opacity', 0.0);
@@ -40,7 +40,7 @@
 
   this.manualOutputBindings = [];
 
-  bindings = {
+  svgbind = {
     bindVisible: function(selector, observable) {
       var el, setter, thisobj;
       el = d3.select(selector);
@@ -120,65 +120,11 @@
       };
       observable.subscribe(setter);
       return setter(observable());
-    },
-    exposeOutputBindings: function(sourceObj, keys, viewModel) {
-      var key, _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = keys.length; _i < _len; _i++) {
-        key = keys[_i];
-        _results.push(this.bindOutput(sourceObj, key, viewModel));
-      }
-      return _results;
-    },
-    bindOutput: function(sourceObj, key, viewModel, key2) {
-      if (!(key2 != null)) {
-        key2 = key;
-      }
-      if (viewModel[key2] != null) {
-        viewModel[key2](sourceObj[key]);
-      } else {
-        viewModel[key2] = ko.observable(sourceObj[key]);
-      }
-      return manualOutputBindings.push([sourceObj, key, viewModel[key2]]);
-    },
-    update: function() {
-      var key, obs, sourceObj, _i, _len, _ref, _results;
-      _results = [];
-      for (_i = 0, _len = manualOutputBindings.length; _i < _len; _i++) {
-        _ref = manualOutputBindings[_i], sourceObj = _ref[0], key = _ref[1], obs = _ref[2];
-        _results.push(obs(sourceObj[key]));
-      }
-      return _results;
-    },
-    bindInput: function(sourceObj, key, viewModel, key2, cb) {
-      if (!(key2 != null)) {
-        key2 = key;
-      }
-      if (viewModel[key2] != null) {
-        viewModel[key2](sourceObj[key]);
-      } else {
-        viewModel[key2] = ko.observable(sourceObj[key]);
-      }
-      return viewModel[key2].subscribe(function(newVal) {
-        sourceObj[key] = newVal;
-        if (cb != null) {
-          return cb();
-        }
-      });
-    },
-    exposeInputBindings: function(sourceObj, keys, viewModel) {
-      var key, _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = keys.length; _i < _len; _i++) {
-        key = keys[_i];
-        _results.push(this.bindInput(sourceObj, key, viewModel));
-      }
-      return _results;
     }
   };
 
   root = typeof window !== "undefined" && window !== null ? window : exports;
 
-  root.bindings = bindings;
+  root.svgbind = svgbind;
 
 }).call(this);

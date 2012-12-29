@@ -1,38 +1,33 @@
 (function() {
-  var LinearCompartmentModel, SquareWavePulse, b, initializeSimulation, root, svgDocumentReady, util;
-
-  root = typeof window !== "undefined" && window !== null ? window : exports;
-
-  b = bindings;
+  var LinearCompartmentModel, SquareWavePulse, ViewModel, initializeSimulation, svgDocumentReady;
 
   LinearCompartmentModel = common.sim.LinearCompartmentModel;
 
   SquareWavePulse = common.sim.SquareWavePulse;
 
-  util = root.util;
+  ViewModel = common.ViewModel;
 
   initializeSimulation = function() {
-    var maxSimTime, oscopes, pulse, scope, sim, update, updateTimer, viewModel, _i, _len;
-    sim = new LinearCompartmentModel(10);
-    pulse = new SquareWavePulse([0.0, 3.0], 15.0);
-    viewModel = {};
-    b.exposeOutputBindings(sim, ['t', 'v0', 'v1', 'v2', 'v3', 'I0', 'I1', 'I2', 'I3'], viewModel);
-    b.exposeInputBindings(sim, ['R_a'], viewModel);
-    b.bindOutput(pulse, 'I_stim', viewModel, 'I_stim');
-    b.bindInput(pulse, 't', viewModel, 't', function() {
-      return pulse.update();
-    });
-    b.bindInput(sim.compartments[0], 'I_ext', viewModel, 'I_stim');
-    ko.applyBindings(viewModel);
+    var maxSimTime, oscopes, pulse, scope, sim, update, updateTimer, vm, _i, _len;
+    sim = LinearCompartmentModel(10).R_a(10.0);
+    pulse = SquareWavePulse().interval([1.0, 1.5]).amplitude(25.0).I_stim(sim.compartments[0].I_ext).t(sim.t);
+    vm = new ViewModel();
+    vm.inheritProperties(sim, ['t', 'v0', 'v1', 'v2', 'v3', 'I0', 'I1', 'I2', 'I3', 'R_a']);
+    vm.inheritProperties(pulse, ['stimOn']);
+    svgbind.bindMultiState({
+      '#stimOff': false,
+      '#stimOn': true
+    }, vm.stimOn);
+    ko.applyBindings(vm);
     oscopes = [];
     oscopes[0] = oscilloscope('#art svg', '#oscope1').data(function() {
-      return [sim.t, sim.v1];
+      return [sim.t(), sim.v0()];
     });
     oscopes[1] = oscilloscope('#art svg', '#oscope2').data(function() {
-      return [sim.t, sim.v2];
+      return [sim.t(), sim.v1()];
     });
     oscopes[2] = oscilloscope('#art svg', '#oscope3').data(function() {
-      return [sim.t, sim.v3];
+      return [sim.t(), sim.v2()];
     });
     util.floatOverRect('#art svg', '#propertiesRect', '#floaty');
     maxSimTime = 10.0;
@@ -43,12 +38,11 @@
     update = function() {
       var _j, _k, _len1, _len2, _results;
       sim.step();
-      b.update();
       for (_j = 0, _len1 = oscopes.length; _j < _len1; _j++) {
         scope = oscopes[_j];
         scope.plot();
       }
-      if (sim.t >= maxSimTime) {
+      if (sim.t() >= maxSimTime) {
         sim.reset();
         _results = [];
         for (_k = 0, _len2 = oscopes.length; _k < _len2; _k++) {
