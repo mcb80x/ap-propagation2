@@ -28,11 +28,10 @@ initializeSimulation = () ->
     sim = LinearCompartmentModel(10).R_a(10.0)
 
     # Build a square-wave pulse object (to connect to the compartment 0)
-    pulse = SquareWavePulse().interval([0.0, 3.0])
-                             .amplitude(15.0)
+    pulse = SquareWavePulse().interval([1.0, 1.5])
+                             .amplitude(25.0)
                              .I_stim(sim.compartments[0].I_ext)
                              .t(sim.t)
-
 
     # ------------------------------------------------------
     # Bind variables from the compartment simulations to the
@@ -45,6 +44,9 @@ initializeSimulation = () ->
 
     # Connect up the compartment model
     vm.inheritProperties(sim, ['t', 'v0', 'v1', 'v2', 'v3', 'I0', 'I1', 'I2', 'I3', 'R_a'])
+    vm.inheritProperties(pulse, ['stimOn'])
+
+    svgbind.bindMultiState({'#stimOff': false, '#stimOn': true}, vm.stimOn)
 
     # Set the html-based Knockout.js bindings in motion
     # This will allow templated 'data-bind' directives to automagically control the simulation / views
@@ -56,9 +58,9 @@ initializeSimulation = () ->
 
     # # Make an oscilloscope and attach it to the svg
     oscopes = []
-    oscopes[0] = oscilloscope('#art svg', '#oscope1').data(-> [sim.t(), sim.v1()])
-    oscopes[1] = oscilloscope('#art svg', '#oscope2').data(-> [sim.t(), sim.v2()])
-    oscopes[2] = oscilloscope('#art svg', '#oscope3').data(-> [sim.t(), sim.v3()])
+    oscopes[0] = oscilloscope('#art svg', '#oscope1').data(-> [sim.t(), sim.v0()])
+    oscopes[1] = oscilloscope('#art svg', '#oscope2').data(-> [sim.t(), sim.v1()])
+    oscopes[2] = oscilloscope('#art svg', '#oscope3').data(-> [sim.t(), sim.v2()])
 
     # # Float a div over a rect in the svg
     util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
@@ -71,7 +73,6 @@ initializeSimulation = () ->
 
         # Update the simulation
         sim.step()
-
 
         # Tell the oscilloscope to plot
         scope.plot() for scope in oscopes
@@ -97,6 +98,6 @@ svgDocumentReady = (xml) ->
 
 
 $ ->
-	# load the svg artwork and hook everything up
-	d3.xml('svg/ap_propagation.svg', 'image/svg+xml', svgDocumentReady)
+    # load the svg artwork and hook everything up
+    d3.xml('svg/ap_propagation.svg', 'image/svg+xml', svgDocumentReady)
 
