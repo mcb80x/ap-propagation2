@@ -21,6 +21,7 @@
     yScale = void 0;
     width = 0;
     height = 0;
+    frame.attr('opacity', 0.0);
     setScales = function() {
       var frameXOffset, frameYOffset;
       frameXOffset = Number(frame.attr('x'));
