@@ -8,35 +8,25 @@ html
     script(src='js/ap-debug.js')
 
     link(rel='stylesheet', type='text/css', href='css/jquery-ui-1.9.2.custom.css')
-    link(rel='stylesheet', type='text/css', href='css/hh.css')
+    link(rel='stylesheet', type='text/css', href='css/mcb80x.css')
 
   body
 
+
+
     #stage
+      #prompt_overlay
       #art
+        #floaty.properties-pane
+          label Axial Resistance:
+            span(data-bind='text: R_a')
+          br
+          div(data-bind="slider: R_a, sliderOptions: {min: 0.5, max: 30, range: false, step: 0.5}")
 
-    #floaty.properties-pane
-      label Axial Resistance:
-        span(data-bind='text: R_a')
-      br
-      div(data-bind="slider: R_a, sliderOptions: {min: 0.5, max: 30, range: false, step: 0.5}")
+      #video
+        video(height='100%', width='100%', id="vid")
+      .timeline-controls
+        //- button.timeline-play
+        #timeline.timeline-container
 
-
-    #properties
-      ul
-        li
-          label R_a:
-            input(data-bind='text: R_a')
-
-        li
-          label v1:
-            span(data-bind='text: v1')
-
-        li
-          label Current:
-            input(data-bind='value: I1')
-
-        li
-          label Membrane Potential:
-            input(data-bind='value: v1')
 
