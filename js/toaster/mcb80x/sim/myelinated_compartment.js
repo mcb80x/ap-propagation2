@@ -7,25 +7,22 @@
     __extends(MyelinatedLinearCompartmentModelSim, _super);
 
     function MyelinatedLinearCompartmentModelSim(nCompartments, nNodes) {
-      var c, interNodeDistance, n, _i, _j, _k, _l, _len, _len1, _m, _ref, _ref1, _ref2, _ref3, _results;
+      var c, interNodeDistance, n, passive, _i, _j, _k, _l, _len, _ref, _ref1, _ref2, _results;
       this.nCompartments = nCompartments;
       this.nNodes = nNodes;
       interNodeDistance = (this.nCompartments - this.nNodes) / (this.nNodes - 1);
       console.log('internode: ' + interNodeDistance);
       this.nodeIndices = [];
+      this.C_m = this.prop(1.1);
       this.compartments = [];
       for (n = _i = 0, _ref = this.nNodes; 0 <= _ref ? _i <= _ref : _i >= _ref; n = 0 <= _ref ? ++_i : --_i) {
         this.compartments.push(new mcb80x.sim.HHSimulationRK4());
         this.nodeIndices.push(this.compartments.length - 1);
         for (c = _j = 0; 0 <= interNodeDistance ? _j <= interNodeDistance : _j >= interNodeDistance; c = 0 <= interNodeDistance ? ++_j : --_j) {
-          this.compartments.push(new mcb80x.sim.PassiveMembrane().C_m(0.5));
+          passive = new mcb80x.sim.PassiveMembrane();
+          passive.C_m = this.C_m;
+          this.compartments.push(passive);
         }
-      }
-      this.C_m = this.prop(1.1);
-      _ref1 = this.compartments;
-      for (_k = 0, _len = _ref1.length; _k < _len; _k++) {
-        c = _ref1[_k];
-        c.C_m = this.C_m;
       }
       this.t = this.compartments[0].t;
       this.R_a = this.prop(1.0);
@@ -33,32 +30,32 @@
       console.log('n Compartments: ' + this.nCompartments);
       this.cIDs = (function() {
         _results = [];
-        for (var _l = 0, _ref2 = this.nCompartments - 1; 0 <= _ref2 ? _l <= _ref2 : _l >= _ref2; 0 <= _ref2 ? _l++ : _l--){ _results.push(_l); }
+        for (var _k = 0, _ref1 = this.nCompartments - 1; 0 <= _ref1 ? _k <= _ref1 : _k >= _ref1; 0 <= _ref1 ? _k++ : _k--){ _results.push(_k); }
         return _results;
       }).apply(this);
       this.v = this.prop((function() {
-        var _len1, _m, _ref3, _results1;
-        _ref3 = this.cIDs;
+        var _l, _len, _ref2, _results1;
+        _ref2 = this.cIDs;
         _results1 = [];
-        for (_m = 0, _len1 = _ref3.length; _m < _len1; _m++) {
-          c = _ref3[_m];
+        for (_l = 0, _len = _ref2.length; _l < _len; _l++) {
+          c = _ref2[_l];
           _results1.push(0.0);
         }
         return _results1;
       }).call(this));
       this.I = this.prop((function() {
-        var _len1, _m, _ref3, _results1;
-        _ref3 = this.cIDs;
+        var _l, _len, _ref2, _results1;
+        _ref2 = this.cIDs;
         _results1 = [];
-        for (_m = 0, _len1 = _ref3.length; _m < _len1; _m++) {
-          c = _ref3[_m];
+        for (_l = 0, _len = _ref2.length; _l < _len; _l++) {
+          c = _ref2[_l];
           _results1.push(0.0);
         }
         return _results1;
       }).call(this));
-      _ref3 = this.cIDs;
-      for (_m = 0, _len1 = _ref3.length; _m < _len1; _m++) {
-        c = _ref3[_m];
+      _ref2 = this.cIDs;
+      for (_l = 0, _len = _ref2.length; _l < _len; _l++) {
+        c = _ref2[_l];
         this['v' + c] = this.prop(0.0);
         this['I' + c] = this.prop(0.0);
       }
