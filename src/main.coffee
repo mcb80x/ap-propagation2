@@ -1,14 +1,14 @@
 #<< mcb80x/timeline
 #<< mcb80x/lesson_plan
-#<< ap_propagation
+#<< ap_propagation2
 
 
 # Script
 
-scene('Action Potential Generation', 'ap_propagation') ->
+scene('Action Potential Generation', 'ap_propagation2') ->
 
     interactive('Basic action walk-through') ->
-        stage 'approp'
+        stage 'approp2'
         duration 10
 
         wait 500
@@ -22,7 +22,7 @@ scene('Action Potential Generation', 'ap_propagation') ->
         goal ->
             initial:
                 transition: ->
-                    if @stage.iterations >= 3
+                    if @stage.iterations >= 30
                         return 'continue'
             hint1:
                 action: ->
@@ -36,5 +36,5 @@ scene('Action Potential Generation', 'ap_propagation') ->
 
 $ ->
 
-	t = new mcb80x.Timeline('#timeline', scenes.ap_propagation)
-	scenes.ap_propagation.run()
+	t = new mcb80x.Timeline('#timeline', scenes.ap_propagation2)
+	scenes.ap_propagation2.run()
