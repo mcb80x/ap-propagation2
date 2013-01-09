@@ -140,7 +140,7 @@ class ApPropagation2 extends mcb80x.ViewModel
             @sim = @myelinatedSim
             @sim.R_a(0.35)
             @sim.C_m(0.5)
-            $('#CSlider').slider('disable')
+            $('#CSlider').slider('enable')
 
         else
             @sim = @unmyelinatedSim
