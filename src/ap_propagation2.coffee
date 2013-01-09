@@ -173,7 +173,6 @@ class ApPropagation2 extends mcb80x.ViewModel
 
 
     show: ->
-        console.log('showing hodghux')
         d3.xml('svg/ap_propagation2.svg', 'image/svg+xml', (xml) => @svgDocumentReady(xml))
 
     hide: ->
