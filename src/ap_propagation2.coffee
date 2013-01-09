@@ -66,7 +66,7 @@ class ApPropagation2 extends mcb80x.ViewModel
 
         # # Make an oscilloscope and attach it to the svg
         @oscopes = []
-        oscopeCompartment = @sim.compartments[19]
+        oscopeCompartment = @sim.compartments[32]
         @oscopes.push oscilloscope('#art svg', '#oscope1').data(=> [@sim.t(), oscopeCompartment.v()])
         # @oscopes[1] = oscilloscope('#art svg', '#oscope2').data(=> [@sim.t(), @sim.v1()])
         # @oscopes[2] = oscilloscope('#art svg', '#oscope3').data(=> [@sim.t(), @sim.v2()])
