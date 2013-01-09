@@ -15,11 +15,12 @@
 
   util = {
     floatOverRect: function(svgSelector, rectSelector, divSelector) {
-      var div, pt, rect, resizeIt, svg;
+      var div, f, pt, rect, resizeIt, svg, _i, _len, _results;
       svg = d3.select(svgSelector).node();
       rect = d3.select(rectSelector).node();
       div = d3.select(divSelector);
       div.style('position', 'absolute');
+      d3.select(rectSelector).attr('opacity', 0.0);
       pt = svg.createSVGPoint();
       resizeIt = function() {
         var corners, matrix;
@@ -39,8 +40,13 @@
         div.style('top', corners.nw.y);
         return div.style('left', corners.nw.x);
       };
-      resizeIt();
-      return resizeHandlers.push(resizeIt);
+      resizeHandlers.push(resizeIt);
+      _results = [];
+      for (_i = 0, _len = resizeHandlers.length; _i < _len; _i++) {
+        f = resizeHandlers[_i];
+        _results.push(f());
+      }
+      return _results;
     }
   };
 

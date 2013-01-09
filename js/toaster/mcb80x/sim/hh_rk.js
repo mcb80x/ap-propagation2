@@ -2,7 +2,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  common.sim.HHSimulationRK4 = (function(_super) {
+  mcb80x.sim.HHSimulationRK4 = (function(_super) {
 
     __extends(HHSimulationRK4, _super);
 
@@ -22,7 +22,7 @@
       this.defineProps(['I_Na', 'I_K', 'I_L', 'g_Na', 'g_K', 'g_L'], 0.0);
       this.defineProps(['v', 'm', 'n', 'h', 't'], 0.0);
       this.reset();
-      this.rk4 = true;
+      this.rk4 = false;
     }
 
     HHSimulationRK4.prototype.reset = function() {
@@ -86,10 +86,10 @@
           _results = [];
           for (_i = 0, _len = svars.length; _i < _len; _i++) {
             i = svars[_i];
-            _results.push(state[i] + dt * k1[i]);
+            _results.push(this.state[i] + dt * k1[i]);
           }
           return _results;
-        })();
+        }).call(this);
       }
       this.v(this.state[0] + this.V_offset());
       this.m(this.state[1]);
@@ -143,10 +143,10 @@
 
     return HHSimulationRK4;
 
-  })(common.PropsEnabled);
+  })(mcb80x.PropsEnabled);
 
-  common.sim.HodgkinHuxleyNeuron = function() {
-    return new common.sim.HHSimulationRK4();
+  mcb80x.sim.HodgkinHuxleyNeuron = function() {
+    return new mcb80x.sim.HHSimulationRK4();
   };
 
 }).call(this);

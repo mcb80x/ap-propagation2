@@ -58,9 +58,39 @@
     bindAttr: function(selector, attr, observable, mapping) {
       var el, setter;
       el = d3.select(selector);
-      console.log(el);
       setter = function(newVal) {
         return el.attr(attr, mapping(newVal));
+      };
+      observable.subscribe(setter);
+      return setter(observable());
+    },
+    bindText: function(selector, observable, centered) {
+      var bbox, center, el, origTransform, recenter, setter;
+      el = d3.select(selector);
+      bbox = el.node().getBBox();
+      console.log(bbox);
+      if (centered) {
+        center = [bbox.x + bbox.width / 2.0, bbox.y + bbox.height / 2.0];
+        origTransform = el.attr('transform');
+        recenter = function(el) {
+          var newbbox, newcenter, transform;
+          newbbox = el.node().getBBox();
+          newcenter = [newbbox.x + newbbox.width / 2.0, newbbox.y + newbbox.height / 2.0];
+          transform = origTransform;
+          transform += 'translate(' + center[0] + ', ' + center[1] + ') ';
+          transform += 'translate(' + (-1 * newcenter[0]) + ', ' + (-1 * newcenter[1]) + ') ';
+          el.attr('transform', transform);
+          console.log(transform);
+          console.log(center);
+          return console.log(newcenter);
+        };
+      } else {
+        recenter = function(el) {};
+      }
+      console.log(recenter);
+      setter = function(newVal) {
+        el.text(newVal);
+        return recenter(el);
       };
       observable.subscribe(setter);
       return setter(observable());
@@ -120,6 +150,31 @@
       };
       observable.subscribe(setter);
       return setter(observable());
+    },
+    bindScale: function(selector, observable, scaleMapping, anchorType) {
+      var anchor, bbox, transformFn;
+      bbox = d3.select(selector).node().getBBox();
+      if (anchorType === 'sw') {
+        anchor = [bbox.x, bbox.y + bbox.height];
+      } else if (anchorType === 'nw') {
+        anchor = [bbox.x, bbox.y + bbox.height];
+      } else if (anchorType === 'ne') {
+        anchor = [bbox.x + bbox.width, bbox.y + bbox.height];
+      } else if (anchorType === 'se') {
+        anchor = [bbox.x, bbox.y];
+      } else {
+        anchor = [bbox.x + bbox.width / 2.0, bbox.y + bbox.height / 2.0];
+      }
+      transformFn = function(val) {
+        var s, transform;
+        s = scaleMapping(val);
+        transform = '';
+        transform += 'translate(' + anchor[0] + ', ' + anchor[1] + ') ';
+        transform += 'scale(' + s + ') ';
+        transform += 'translate(' + (-1 * anchor[0]) + ', ' + (-1 * anchor[1]) + ') ';
+        return transform;
+      };
+      return this.bindAttr(selector, 'transform', observable, transformFn);
     }
   };
 

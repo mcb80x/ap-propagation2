@@ -1,6 +1,6 @@
 (function() {
 
-  common.PropsEnabled = (function() {
+  mcb80x.PropsEnabled = (function() {
 
     function PropsEnabled() {}
 
@@ -50,12 +50,25 @@
 
   })();
 
-  common.ViewModel = (function() {
+  mcb80x.ViewModel = (function() {
 
     function ViewModel() {}
 
     ViewModel.prototype.inheritProperties = function(target, keys) {
-      var k, targetVal, _i, _len, _results;
+      var k, targetVal, v, _i, _len, _results;
+      if (!(keys != null)) {
+        keys = (function() {
+          var _results;
+          _results = [];
+          for (k in target) {
+            v = target[k];
+            if (v.subscribe != null) {
+              _results.push(k);
+            }
+          }
+          return _results;
+        })();
+      }
       if (!$.isArray(keys)) {
         keys = [keys];
       }

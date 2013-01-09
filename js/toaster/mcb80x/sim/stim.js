@@ -2,7 +2,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  common.sim.SquareWavePulseSim = (function(_super) {
+  mcb80x.sim.SquareWavePulseSim = (function(_super) {
 
     __extends(SquareWavePulseSim, _super);
 
@@ -31,10 +31,10 @@
 
     return SquareWavePulseSim;
 
-  })(common.PropsEnabled);
+  })(mcb80x.PropsEnabled);
 
-  common.sim.SquareWavePulse = function() {
-    return new common.sim.SquareWavePulseSim();
+  mcb80x.sim.SquareWavePulse = function() {
+    return new mcb80x.sim.SquareWavePulseSim();
   };
 
 }).call(this);
