@@ -21,17 +21,17 @@ html
           label Axial Resistance:
             span(data-bind='text: R_a')
           br
-          div(data-bind="slider: R_a, sliderOptions: {min: 0.05, max: 2.0, range: false, step: 0.05}")
+          div(data-bind="slider: R_a, sliderOptions: {min: 0.25, max: 1.5, range: false, step: 0.05}")
 
           label Membrane Capacitance:
             span(data-bind='text: C_m')
           br
-          div(data-bind="slider: C_m, sliderOptions: {min: 0.1, max: 3.0, range: false, step: 0.1}")
+          div(data-bind="slider: C_m, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}")
 
           label Pulse Current:
             span(data-bind='text: pulseAmplitude')
           br
-          div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 1000.0, range: false, step: 10}")
+          div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 200.0, range: false, step: 10}")
 
 
       #video
