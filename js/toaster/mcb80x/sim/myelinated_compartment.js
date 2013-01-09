@@ -11,7 +11,6 @@
       this.nCompartments = nCompartments;
       this.nNodes = nNodes;
       interNodeDistance = (this.nCompartments - this.nNodes) / (this.nNodes - 1);
-      console.log('internode: ' + interNodeDistance);
       this.nodeIndices = [];
       this.C_m = this.prop(1.1);
       this.compartments = [];
@@ -27,7 +26,6 @@
       this.t = this.compartments[0].t;
       this.R_a = this.prop(1.0);
       this.nCompartments = this.compartments.length;
-      console.log('n Compartments: ' + this.nCompartments);
       this.cIDs = (function() {
         _results = [];
         for (var _k = 0, _ref1 = this.nCompartments - 1; 0 <= _ref1 ? _k <= _ref1 : _k >= _ref1; 0 <= _ref1 ? _k++ : _k--){ _results.push(_k); }

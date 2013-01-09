@@ -12,11 +12,21 @@
     }
 
     ApPropagation2.prototype.init = function() {
+      var _this = this;
       this.myelinatedSim = mcb80x.sim.MyelinatedLinearCompartmentModel(24, 4).C_m(0.9);
-      this.unmyelinatedSim = mcb80x.sim.LinearCompartmentModel(24);
-      this.sim = this.myelinatedSim;
+      this.unmyelinatedSim = mcb80x.sim.LinearCompartmentModel(36).C_m(1.1);
+      this.sim = this.unmyelinatedSim;
       this.sim.R_a(0.25);
       this.pulseAmplitude = ko.observable(180.0);
+      this.myelinated = ko.observable(0);
+      this.xvPath = this.svg.append('path');
+      this.oscopes = [];
+      this.oscopes.push(oscilloscope('#art svg', '#oscope1'));
+      util.floatOverRect('#art svg', '#propertiesRect', '#floaty');
+      svgbind.bindVisible('#myelin', this.myelinated);
+      this.myelinated.subscribe(function(v) {
+        return _this.myelinate(v);
+      });
       return this.setup();
     };
 
@@ -32,12 +42,10 @@
         '#stimOn': true
       }, this.stimOn);
       ko.applyBindings(this);
-      this.oscopes = [];
       oscopeCompartment = this.sim.compartments[32];
-      this.oscopes.push(oscilloscope('#art svg', '#oscope1').data(function() {
+      this.oscopes[0].data(function() {
         return [_this.sim.t(), oscopeCompartment.v()];
-      }));
-      util.floatOverRect('#art svg', '#propertiesRect', '#floaty');
+      });
       this.maxSimTime = 30.0;
       _ref = this.oscopes;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -52,16 +60,12 @@
       nCompartments = this.sim.compartments.length;
       this.xScale = d3.scale.linear().domain([0, nCompartments]).range([xvbbox.x, xvbbox.x + xvbbox.width]);
       this.vScale = d3.scale.linear().domain([-80, 50]).range([xvbbox.y + xvbbox.height, xvbbox.y]);
-      console.log(this.nCompartments);
-      console.log(xvbbox);
-      console.log(this.xScale(5));
-      console.log(this.xScale(100));
       this.xvLine = d3.svg.line().interpolate('basis').x(function(d, i) {
         return _this.xScale(i);
       }).y(function(d, i) {
         return _this.vScale(d);
       });
-      return this.xvPath = this.svg.append('path').data([this.I()]).attr('class', 'xv-line').attr('d', this.xvLine);
+      return this.xvPath.data([this.I()]).attr('class', 'xv-line').attr('d', this.xvLine);
     };
 
     ApPropagation2.prototype.play = function() {
@@ -90,22 +94,35 @@
     };
 
     ApPropagation2.prototype.stop = function() {
+      var scope, _i, _len, _ref, _results;
       if (this.updateTimer) {
-        return clearInterval(this.updateTimer);
+        clearInterval(this.updateTimer);
       }
+      this.sim.reset();
+      _ref = this.oscopes;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        scope = _ref[_i];
+        _results.push(scope.reset());
+      }
+      return _results;
     };
 
-    ApPropagation2.prototype.myelinated = function(v) {
-      if (v != null) {
-        if (v) {
-          this.sim = this.myelinatedSim;
-        } else {
-          this.sim = this.unmyelinatedSim;
-        }
-        return this.setup();
+    ApPropagation2.prototype.myelinate = function(v) {
+      this.stop();
+      if (v) {
+        this.sim = this.myelinatedSim;
+        this.sim.R_a(0.35);
+        this.sim.C_m(0.5);
+        $('#CSlider').slider('enable');
       } else {
-        return this.sim === this.myelinatedSim;
+        this.sim = this.unmyelinatedSim;
+        this.sim.R_a(0.45);
+        this.sim.C_m(1.1);
+        $('#CSlider').slider('disable');
       }
+      this.setup();
+      return this.play();
     };
 
     ApPropagation2.prototype.svgDocumentReady = function(xml) {
@@ -121,7 +138,6 @@
 
     ApPropagation2.prototype.show = function() {
       var _this = this;
-      console.log('showing hodghux');
       return d3.xml('svg/ap_propagation2.svg', 'image/svg+xml', function(xml) {
         return _this.svgDocumentReady(xml);
       });
