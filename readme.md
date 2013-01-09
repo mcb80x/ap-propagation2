@@ -2,7 +2,7 @@
 
 Some experiments in building an AP propagation simulator for mcb80x.
 
-Live demo: [mcb80x.github.com/ap-propagation](http://mcb80x.github.com/ap-propagation)
+Live demo: [mcb80x.github.com/ap-propagation2](http://mcb80x.github.com/ap-propagation2)
 
 ## Dependencies:
 
