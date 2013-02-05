@@ -19,9 +19,12 @@
       this.E_Na = this.prop(115 + this.V_rest());
       this.E_K = this.prop(-12 + this.V_rest());
       this.E_L = this.prop(10.6 + this.V_rest());
+      this.voltageClamped = this.prop(false);
+      this.clampVoltage = this.prop(-65.0);
       this.defineProps(['I_Na', 'I_K', 'I_L', 'g_Na', 'g_K', 'g_L'], 0.0);
       this.defineProps(['v', 'm', 'n', 'h', 't'], 0.0);
       this.reset();
+      this.t(0.0);
       this.rk4 = false;
     }
 
@@ -32,8 +35,7 @@
       this.m(this.alphaM(v_) / (this.alphaM(v_) + this.betaM(v_)));
       this.n(this.alphaN(v_) / (this.alphaN(v_) + this.betaN(v_)));
       this.h(this.alphaH(v_) / (this.alphaH(v_) + this.betaH(v_)));
-      this.state = [this.v(), this.m(), this.n(), this.h()];
-      return this.t(0.0);
+      return this.state = [this.v(), this.m(), this.n(), this.h()];
     };
 
     HHSimulationRK4.prototype.step = function(stepCallback) {
@@ -91,7 +93,16 @@
           return _results;
         }).call(this);
       }
-      this.v(this.state[0] + this.V_offset());
+      if (this.voltageClamped()) {
+        this.v(this.clampVoltage());
+      } else {
+        this.v(this.state[0] + this.V_offset());
+      }
+      if (isNaN(this.v())) {
+        this.reset();
+        console.log(this.v());
+        return;
+      }
       this.m(this.state[1]);
       this.n(this.state[2]);
       this.h(this.state[3]);

@@ -18,6 +18,8 @@
       this.defineProps(['I_L', 'g_L'], 0.0);
       this.v = this.prop(0.0);
       this.t = this.prop(0.0);
+      this.voltageClamped = this.prop(false);
+      this.clampVoltage = this.prop(-65.0);
       this.reset();
       this.rk4 = false;
     }
@@ -42,7 +44,12 @@
       } else {
         this.state = this.state + dt * k1;
       }
-      this.v(this.state + this.V_offset());
+      if (this.voltageClamped()) {
+        this.v(this.clampVoltage());
+        console.log('clamped');
+      } else {
+        this.v(this.state + this.V_offset());
+      }
       if (stepCallback != null) {
         return stepCallback();
       }

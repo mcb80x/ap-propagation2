@@ -9,16 +9,22 @@
 
     function ApPropagation2() {
       this.duration = ko.observable(10.0);
+      this.stimCompIndex = ko.observable(0);
+      this.voltageClamped = ko.observable(false);
+      this.clampVoltage = ko.observable(-65.0);
+      this.XVPlotVRange = [-80, 50];
     }
 
     ApPropagation2.prototype.init = function() {
-      var _this = this;
+      var stimCompartment,
+        _this = this;
       this.myelinatedSim = mcb80x.sim.MyelinatedLinearCompartmentModel(24, 4).C_m(0.9);
       this.unmyelinatedSim = mcb80x.sim.LinearCompartmentModel(36).C_m(1.1);
       this.sim = this.unmyelinatedSim;
       this.sim.R_a(0.25);
       this.pulseAmplitude = ko.observable(180.0);
       this.myelinated = ko.observable(0);
+      this.clampVoltage = ko.observable(-65.0);
       this.xvPath = this.svg.append('path');
       this.oscopes = [];
       this.oscopes.push(oscilloscope('#art svg', '#oscope1'));
@@ -27,20 +33,37 @@
       this.myelinated.subscribe(function(v) {
         return _this.myelinate(v);
       });
+      svgbind.bindSlider('#vKnob', '#XVPlot', 'v', this.clampVoltage, d3.scale.linear().domain([0, 1]).range(this.XVPlotVRange));
+      svgbind.bindVisible('#vKnob', this.voltageClamped);
+      this.voltageClamped.subscribe(function() {
+        return _this.setup();
+      });
+      svgbind.bindMultiState({
+        '#VoltageClamp': true,
+        '#CurrentStimulator': false
+      }, this.voltageClamped);
+      stimCompartment = this.sim.compartments[this.stimCompIndex()];
+      this.pulse = mcb80x.sim.CurrentPulse().I_stim(stimCompartment.I_ext).t(this.sim.t);
+      this.pulse.amplitude = this.pulseAmplitude;
+      this.inheritProperties(this.pulse, ['stimOn']);
+      svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', this.stimOn);
       return this.setup();
     };
 
     ApPropagation2.prototype.setup = function() {
-      var nCompartments, oscopeCompartment, scope, xvbbox, _i, _len, _ref,
+      var nCompartments, oscopeCompartment, scope, stimCompartment, xvbbox, _i, _len, _ref,
         _this = this;
-      this.pulse = mcb80x.sim.SquareWavePulse().interval([1.0, 1.5]).I_stim(this.sim.compartments[0].I_ext).t(this.sim.t);
-      this.pulse.amplitude = this.pulseAmplitude;
       this.inheritProperties(this.sim);
-      this.inheritProperties(this.pulse, ['stimOn']);
-      svgbind.bindMultiState({
-        '#stimOff': false,
-        '#stimOn': true
-      }, this.stimOn);
+      stimCompartment = this.sim.compartments[this.stimCompIndex()];
+      if (this.voltageClamped()) {
+        stimCompartment.voltageClamped(true);
+        stimCompartment.clampVoltage(this.clampVoltage);
+        console.log('applying voltage clamp');
+      } else {
+        stimCompartment.voltageClamped(false);
+        console.log('clearing voltage clamp: ' + stimCompartment.voltageClamped());
+        this.pulse.I_stim(stimCompartment.I_ext);
+      }
       ko.applyBindings(this);
       oscopeCompartment = this.sim.compartments[32];
       this.oscopes[0].data(function() {
@@ -59,7 +82,7 @@
       xvbbox = this.xvplot.node().getBBox();
       nCompartments = this.sim.compartments.length;
       this.xScale = d3.scale.linear().domain([0, nCompartments]).range([xvbbox.x, xvbbox.x + xvbbox.width]);
-      this.vScale = d3.scale.linear().domain([-80, 50]).range([xvbbox.y + xvbbox.height, xvbbox.y]);
+      this.vScale = d3.scale.linear().domain(this.XVPlotVRange).range([xvbbox.y + xvbbox.height, xvbbox.y]);
       this.xvLine = d3.svg.line().interpolate('basis').x(function(d, i) {
         return _this.xScale(i);
       }).y(function(d, i) {
@@ -72,23 +95,14 @@
       var update,
         _this = this;
       update = function() {
-        var scope, _i, _j, _len, _len1, _ref, _ref1;
+        var scope, _i, _len, _ref;
         _this.sim.step();
         _ref = _this.oscopes;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           scope = _ref[_i];
           scope.plot();
         }
-        _this.xvPath.data([_this.sim.v()]).attr('d', _this.xvLine);
-        if (_this.sim.t() >= _this.maxSimTime) {
-          _this.sim.reset();
-          _ref1 = _this.oscopes;
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            scope = _ref1[_j];
-            scope.reset();
-          }
-          return _this.iterations += 1;
-        }
+        return _this.xvPath.data([_this.sim.v()]).attr('d', _this.xvLine);
       };
       return this.updateTimer = setInterval(update, 10);
     };
@@ -145,7 +159,7 @@
 
     ApPropagation2.prototype.hide = function() {
       this.runSimulation = false;
-      return d3.select('#art').transition().style('opacity', 0.0).duration(1000);
+      return d3.select('#interactive').transition().style('opacity', 0.0).duration(1000);
     };
 
     return ApPropagation2;

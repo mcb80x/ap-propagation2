@@ -151,6 +151,88 @@
       observable.subscribe(setter);
       return setter(observable());
     },
+    bindAsToggle: function(onSelector, offSelector, observable) {
+      var s, selectorMap, _i, _len, _ref, _results;
+      selectorMap = {};
+      selectorMap[onSelector] = true;
+      selectorMap[offSelector] = false;
+      this.bindMultiState(selectorMap, observable);
+      _ref = Object.keys(selectorMap);
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        s = _ref[_i];
+        _results.push(d3.select(s).on('click', function() {
+          return observable(!observable());
+        }));
+      }
+      return _results;
+    },
+    bindAsMomentaryButton: function(onSelector, offSelector, observable) {
+      var s, selectorMap, _i, _len, _ref, _results;
+      selectorMap = {};
+      selectorMap[onSelector] = true;
+      selectorMap[offSelector] = false;
+      this.bindMultiState(selectorMap, observable);
+      _ref = Object.keys(selectorMap);
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        s = _ref[_i];
+        d3.selectAll(s).on('mousedown', function() {
+          return observable(true);
+        });
+        d3.selectAll(s).on('mouseup', function() {
+          return observable(false);
+        });
+        _results.push(console.log(d3.select(s)));
+      }
+      return _results;
+    },
+    bindSlider: function(knobSelector, boxSelector, orientation, observable, mapping) {
+      var box, drag, maxCoord, minCoord, normalizedScale;
+      if (mapping === void 0) {
+        mapping = d3.scale.linear().domain([0, 1]).range([0, 1]);
+      }
+      box = d3.select(boxSelector);
+      if (orientation === 'h') {
+        minCoord = 0;
+        maxCoord = minCoord + box.node().width.animVal.value;
+        normalizedScale = d3.scale.linear().domain([minCoord, maxCoord]).range([0.0, 1.0]).clamp(true);
+      } else {
+        maxCoord = 0;
+        minCoord = -box.node().height.animVal.value;
+        normalizedScale = d3.scale.linear().domain([maxCoord, minCoord]).range([0.0, 1.0]).clamp(true);
+      }
+      drag = d3.behavior.drag().origin(Object).on("drag", function(d, i) {
+        if (orientation === 'h') {
+          d.x += d3.event.dx;
+          if (d.x > maxCoord) {
+            d.x = maxCoord;
+          }
+          if (d.x < minCoord) {
+            d.x = minCoord;
+          }
+          observable(mapping(normalizedScale(d.x)));
+        } else {
+          d.y += d3.event.dy;
+          if (d.y > maxCoord) {
+            d.y = maxCoord;
+          }
+          if (d.y < minCoord) {
+            d.y = minCoord;
+          }
+          observable(mapping(normalizedScale(d.y)));
+        }
+        return d3.select(this).attr("transform", function(d2, i) {
+          return "translate(" + [d2.x, d2.y] + ")";
+        });
+      });
+      return d3.select(knobSelector).data([
+        {
+          'x': 0,
+          'y': 0
+        }
+      ]).call(drag);
+    },
     bindScale: function(selector, observable, scaleMapping, anchorType) {
       var anchor, bbox, transformFn;
       bbox = d3.select(selector).node().getBBox();

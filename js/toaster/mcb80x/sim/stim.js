@@ -37,4 +37,46 @@
     return new mcb80x.sim.SquareWavePulseSim();
   };
 
+  mcb80x.sim.CurrentPulseSim = (function(_super) {
+
+    __extends(CurrentPulseSim, _super);
+
+    function CurrentPulseSim() {
+      var _this = this;
+      this.amplitude = this.prop(15);
+      this.I_stim = this.prop(0.0);
+      this.stimOn = this.prop(false);
+      this.minDuration = this.prop(5.0);
+      this.stimLocked = this.prop(false);
+      this.stimLockTime = 0.0;
+      this.t = this.prop(0.0, function() {
+        return _this.update();
+      });
+    }
+
+    CurrentPulseSim.prototype.update = function() {
+      if (this.stimLocked() && (this.t() - this.stimLockTime) > this.minDuration()) {
+        this.stimLocked(false);
+        console.log('unlocked');
+      }
+      if (this.stimOn() || this.stimLocked()) {
+        if (!this.stimLocked()) {
+          this.stimLocked(true);
+          this.stimLockTime = this.t();
+          console.log('locked');
+        }
+        return this.I_stim(this.amplitude());
+      } else {
+        return this.I_stim(0.0);
+      }
+    };
+
+    return CurrentPulseSim;
+
+  })(mcb80x.PropsEnabled);
+
+  mcb80x.sim.CurrentPulse = function() {
+    return new mcb80x.sim.CurrentPulseSim();
+  };
+
 }).call(this);

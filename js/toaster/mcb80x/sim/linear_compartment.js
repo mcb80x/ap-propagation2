@@ -30,7 +30,6 @@
         c = _ref1[_j];
         c.C_m = this.C_m;
       }
-      console.log(this.compartments);
       this.t = this.compartments[0].t;
       this.R_a = this.prop(2.0);
       this.v = this.prop((function() {
