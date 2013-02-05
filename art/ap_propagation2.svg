@@ -2,11 +2,12 @@
 <!-- Generator: Adobe Illustrator 16.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1"
-	 id="svg2" inkscape:version="0.48.2 r9819" sodipodi:docname="ap_propagation2.svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#"
+	 id="svg2" xmlns:svg="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" inkscape:version="0.48.2 r9819" sodipodi:docname="ap_propagation2.svg"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1280px" height="720px"
 	 viewBox="0 0 1280 720" enable-background="new 0 0 1280 720" xml:space="preserve">
+<rect id="sliderBox" x="23.5" y="397.793" stroke="#FFFFFF" stroke-miterlimit="10" width="131.787" height="4.707"/>
 <rect id="XVPlot_1_" x="246.5" y="573.866" fill="#FFFFFF" width="923" height="76.496"/>
-<sodipodi:namedview  inkscape:window-width="1456" inkscape:window-height="849" inkscape:pageopacity="0" inkscape:window-x="127" inkscape:window-maximized="0" inkscape:window-y="10" inkscape:current-layer="svg2" inkscape:pageshadow="2" id="namedview175" bordercolor="#666666" inkscape:cy="360" showgrid="false" guidetolerance="10" borderopacity="1" inkscape:cx="430.61807" objecttolerance="10" pagecolor="#ffffff" inkscape:zoom="0.87638889" gridtolerance="10">
+<sodipodi:namedview  id="namedview175" bordercolor="#666666" inkscape:cy="360" showgrid="false" guidetolerance="10" borderopacity="1" inkscape:cx="430.61807" objecttolerance="10" pagecolor="#ffffff" inkscape:zoom="0.87638889" gridtolerance="10" inkscape:window-maximized="0" inkscape:window-y="10" inkscape:current-layer="svg2" inkscape:window-width="1456" inkscape:window-height="849" inkscape:pageopacity="0" inkscape:window-x="127" inkscape:pageshadow="2">
 	</sodipodi:namedview>
 <g id="myelin">
 	
@@ -139,13 +140,13 @@ h0tnl60dJ5/DVeXzbsVCKIbgnfM9698BtCwGvRCKI/s5RR7f4asV/5rrW/neBWG+VFzHc7hUXbf+
 +1rPPcdrflPL4bs5Tl6Bq8rn3RmLwXv1vkeogdawXgKx58R/2wJ8h7/le+T5lr53K33Hc/isuv4Z
 jlPL4Ts7Tl6Bq8vn3ZkLYe2fAdYsitY/b92o4jt89ofA/Im+d4lgj+fwnes6tRxwHMfhmzjeXWBB
 ID98Rni/dGOK73CrzuM43EJdx3PAcYAv7Hj3yYsC4JIL4m+A73DtzuM43EJdx3PAcYDryecAAAAA
-AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.5 438.5)">
+AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" sodipodi:absref="/Users/davidcox/Repositories/mcb80x/ap-propagation2/art/2C521EBB09EBA413.png" transform="matrix(1 0 0 1 243.5 438.5)">
 	</image>
 	<g id="g8">
 		<g id="g10">
 			<g id="g34_49_">
 				
-					<radialGradient id="path53_1_" cx="430.1206" cy="656.3643" r="222.0092" fx="394.7293" fy="607.8569" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 79.2365 251.1562)" gradientUnits="userSpaceOnUse">
+					<radialGradient id="path53_1_" cx="-289.7095" cy="935.1572" r="222.0142" fx="-325.1016" fy="886.6487" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 505.2023 129.9199)" gradientUnits="userSpaceOnUse">
 					<stop  offset="0" style="stop-color:#FFFFFF"/>
 					<stop  offset="0.1042" style="stop-color:#FBE6D3"/>
 					<stop  offset="0.2914" style="stop-color:#F5C499"/>
@@ -161,7 +162,7 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 			</g>
 			<g id="g34_48_">
 				
-					<radialGradient id="path53_2_" cx="747.5098" cy="667.0742" r="222.009" fx="712.1184" fy="618.5669" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 79.2365 251.1562)" gradientUnits="userSpaceOnUse">
+					<radialGradient id="path53_2_" cx="27.6826" cy="945.8633" r="222.0108" fx="-7.7092" fy="897.3554" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 505.2023 129.9199)" gradientUnits="userSpaceOnUse">
 					<stop  offset="0" style="stop-color:#FFFFFF"/>
 					<stop  offset="0.1042" style="stop-color:#FBE6D3"/>
 					<stop  offset="0.2914" style="stop-color:#F5C499"/>
@@ -172,12 +173,12 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 					<stop  offset="1" style="stop-color:#E87C24"/>
 				</radialGradient>
 				<path id="path53_63_" inkscape:connector-curvature="0" fill="url(#path53_2_)" d="M601.927,532.368c0,6.627-3.187,12-7.117,12
-					H446.925c-3.93,0-7.116-5.373-7.116-12v-72.944c0-6.628,3.188-12,7.116-12H594.81c3.932,0,7.116,5.372,7.116,12L601.927,532.368
+					H446.925c-3.93,0-7.116-5.373-7.116-12v-72.944c0-6.628,3.188-12,7.116-12H594.81c3.936,0,7.116,5.372,7.116,12L601.927,532.368
 					L601.927,532.368z"/>
 			</g>
 			<g id="g34_47_">
 				
-					<radialGradient id="path53_3_" cx="1059.8438" cy="677.6162" r="222.0098" fx="1024.4521" fy="629.1087" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 79.2365 251.1562)" gradientUnits="userSpaceOnUse">
+					<radialGradient id="path53_3_" cx="340.0166" cy="956.4092" r="222.0166" fx="304.6239" fy="907.9001" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 505.2023 129.9199)" gradientUnits="userSpaceOnUse">
 					<stop  offset="0" style="stop-color:#FFFFFF"/>
 					<stop  offset="0.1042" style="stop-color:#FBE6D3"/>
 					<stop  offset="0.2914" style="stop-color:#F5C499"/>
@@ -188,12 +189,12 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 					<stop  offset="1" style="stop-color:#E87C24"/>
 				</radialGradient>
 				<path id="path53_62_" inkscape:connector-curvature="0" fill="url(#path53_3_)" d="M787.161,532.368c0,6.627-3.188,12-7.116,12
-					H632.159c-3.931,0-7.116-5.373-7.116-12v-72.944c0-6.628,3.188-12,7.116-12h147.886c3.929,0,7.115,5.372,7.115,12
+					H632.159c-3.935,0-7.116-5.373-7.116-12v-72.944c0-6.628,3.188-12,7.116-12h147.886c3.929,0,7.115,5.372,7.115,12
 					L787.161,532.368L787.161,532.368z"/>
 			</g>
 			<g id="g34_46_">
 				
-					<radialGradient id="path53_4_" cx="1372.1748" cy="688.1572" r="222.0082" fx="1336.7834" fy="639.6501" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 79.2365 251.1562)" gradientUnits="userSpaceOnUse">
+					<radialGradient id="path53_4_" cx="652.3457" cy="966.9502" r="222.0057" fx="616.9548" fy="918.4438" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 505.2023 129.9199)" gradientUnits="userSpaceOnUse">
 					<stop  offset="0" style="stop-color:#FFFFFF"/>
 					<stop  offset="0.1042" style="stop-color:#FBE6D3"/>
 					<stop  offset="0.2914" style="stop-color:#F5C499"/>
@@ -204,12 +205,12 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 					<stop  offset="1" style="stop-color:#E87C24"/>
 				</radialGradient>
 				<path id="path53_61_" inkscape:connector-curvature="0" fill="url(#path53_4_)" d="M972.396,532.368c0,6.627-3.188,12-7.117,12
-					H817.395c-3.931,0-7.116-5.373-7.116-12v-72.944c0-6.628,3.188-12,7.116-12H965.28c3.93,0,7.114,5.372,7.114,12v72.944H972.396z
+					H817.395c-3.931,0-7.112-5.373-7.112-12v-72.944c0-6.628,3.188-12,7.112-12H965.28c3.93,0,7.114,5.372,7.114,12v72.944H972.396z
 					"/>
 			</g>
 			<g id="g34_45_">
 				
-					<radialGradient id="path53_5_" cx="1684.5068" cy="698.6992" r="222.0069" fx="1649.1158" fy="650.1924" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 79.2365 251.1562)" gradientUnits="userSpaceOnUse">
+					<radialGradient id="path53_5_" cx="964.6758" cy="977.4922" r="222.0062" fx="929.2849" fy="928.9855" gradientTransform="matrix(0.593 -0.0135 0.0032 0.4 505.2023 129.9199)" gradientUnits="userSpaceOnUse">
 					<stop  offset="0" style="stop-color:#FFFFFF"/>
 					<stop  offset="0.1042" style="stop-color:#FBE6D3"/>
 					<stop  offset="0.2914" style="stop-color:#F5C499"/>
@@ -220,7 +221,7 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 					<stop  offset="1" style="stop-color:#E87C24"/>
 				</radialGradient>
 				<path id="path53_60_" inkscape:connector-curvature="0" fill="url(#path53_5_)" d="M1157.631,532.368c0,6.627-3.188,12-7.117,12
-					h-147.885c-3.931,0-7.117-5.373-7.117-12v-72.944c0-6.628,3.188-12,7.117-12h147.885c3.931,0,7.115,5.372,7.115,12v72.944
+					h-147.885c-3.931,0-7.117-5.373-7.117-12v-72.944c0-6.628,3.188-12,7.117-12h147.885c3.935,0,7.115,5.372,7.115,12v72.944
 					H1157.631z"/>
 			</g>
 		</g>
@@ -228,7 +229,7 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 </g>
 <rect id="rect55" x="86.491" y="476.174" fill="#404DA1" stroke="#E26A27" stroke-width="2.3848" stroke-miterlimit="10" width="1125.771" height="7.812"/>
 <rect id="rect57" x="86.491" y="507.175" fill="#404DA1" stroke="#E26A27" stroke-width="2.3848" stroke-miterlimit="10" width="1125.771" height="7.813"/>
-<linearGradient id="rect94_1_" gradientUnits="userSpaceOnUse" x1="749.377" y1="578.1738" x2="749.377" y2="554.9863" gradientTransform="matrix(1 0 0 1 -100 -71)">
+<linearGradient id="rect94_1_" gradientUnits="userSpaceOnUse" x1="949.376" y1="720.1738" x2="949.376" y2="696.9863" gradientTransform="matrix(1 0 0 1 -300 -213)">
 	<stop  offset="0.0067" style="stop-color:#B2D675"/>
 	<stop  offset="0.0234" style="stop-color:#B7D97E"/>
 	<stop  offset="0.1006" style="stop-color:#CDE4A6"/>
@@ -273,19 +274,19 @@ AAAAAAAAAAAAAFfI/wowAMSn4dQo7gRvAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 243.
 </g>
 <line id="line3942" fill="none" stroke="#020202" stroke-width="4.7695" stroke-miterlimit="10" x1="974.276" y1="355.925" x2="963.408" y2="247.228"/>
 <rect id="oscope1" x="818.215" y="63.601" fill="none" stroke="#BE3A26" stroke-width="2.3848" stroke-miterlimit="10" width="247.432" height="164.248"/>
-<radialGradient id="path3967_1_" cx="701.8916" cy="-250.0449" r="406.036" gradientTransform="matrix(0.4 0 0 -0.2284 659.648 88.5841)" gradientUnits="userSpaceOnUse">
+<radialGradient id="path3967_1_" cx="-1105.1084" cy="-871.7637" r="406.0336" gradientTransform="matrix(0.4 0 0 -0.2284 1382.4478 -53.4159)" gradientUnits="userSpaceOnUse">
 	<stop  offset="0" style="stop-color:#020202;stop-opacity:0"/>
 	<stop  offset="1" style="stop-color:#020202"/>
 </radialGradient>
 <path id="path3967" inkscape:connector-curvature="0" fill="url(#path3967_1_)" d="M1064.427,212.373
 	c0,8.529-6.25,15.446-13.961,15.446H830.347c-7.714,0-13.965-6.917-13.965-15.446V79.015c0-8.531,6.251-15.445,13.965-15.445
 	h220.119c7.711,0,13.961,6.914,13.961,15.445V212.373L1064.427,212.373z"/>
-<linearGradient id="rect3919_2_" gradientUnits="userSpaceOnUse" x1="-1244.1748" y1="-1397.708" x2="-891.6201" y2="-1397.708" gradientTransform="matrix(0.4 0 0 -0.4 562.0494 -59.4808)">
+<linearGradient id="rect3919_2_" gradientUnits="userSpaceOnUse" x1="-3051.1768" y1="-1752.708" x2="-2698.6221" y2="-1752.708" gradientTransform="matrix(0.4 0 0 -0.4 1284.8501 -201.4808)">
 	<stop  offset="0.2609" style="stop-color:#FFFFFF"/>
 	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
 </linearGradient>
 <rect id="rect3919" x="64.38" y="442.424" fill="url(#rect3919_2_)" width="141.022" height="114.356"/>
-<linearGradient id="rect3919_3_" gradientUnits="userSpaceOnUse" x1="-161.5371" y1="780.1602" x2="191.0156" y2="780.1602" gradientTransform="matrix(-0.4 0 0 0.4 1163.8452 187.5374)">
+<linearGradient id="rect3919_3_" gradientUnits="userSpaceOnUse" x1="4721.4688" y1="1135.1602" x2="5074.0215" y2="1135.1602" gradientTransform="matrix(-0.4 0 0 0.4 3117.0483 45.5375)">
 	<stop  offset="0.2609" style="stop-color:#FFFFFF"/>
 	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
 </linearGradient>
@@ -912,7 +913,7 @@ SdLC52ztAkm6zUR9pZOz6Tt4/P+VJElXoZL00Cue/7pUqx/DdzqfHKu+jz9//aUBL0kCKUmSBFfD
 z0V3c24ETZIkkJIk6aZwpeP9QmASNEmSQEqSJAGWJGCSJEknUEmSQMD69PNEN3QoYJIkSSAlSVIF
 aN3xfOLmVwmUJEkSSEmStCp0XSpBkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ
 kiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ
-kiRJkiRJkiRJkiRJknSh/p8AAwDEtaFJ6ZU1lgAAAABJRU5ErkJggg==" transform="matrix(0.211 0 0 0.2111 62.1787 118.5391)">
+kiRJkiRJkiRJkiRJknSh/p8AAwDEtaFJ6ZU1lgAAAABJRU5ErkJggg==" sodipodi:absref="/Users/davidcox/Repositories/mcb80x/ap-propagation2/art/2C521EBB09EBA411.png" transform="matrix(0.211 0 0 0.2111 62.1787 118.5391)">
 		</image>
 		
 			<image overflow="visible" opacity="0.39" enable-background="new    " width="594" height="594" id="image3902_3_" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlIAAAJSCAYAAAAI3ytzAAAACXBIWXMAADPTAAAz0wFrfAr/AAAA
@@ -1514,14 +1515,14 @@ SdLC52ztAkm6zUR9pZOz6Tt4/P+VJElXoZL00Cue/7pUqx/DdzqfHKu+jz9//aUBL0kCKUmSBFfD
 z0V3c24ETZIkkJIk6aZwpeP9QmASNEmSQEqSJAGWJGCSJEknUEmSQMD69PNEN3QoYJIkSSAlSVIF
 aN3xfOLmVwmUJEkSSEmStCp0XSpBkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ
 kiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ
-kiRJkiRJkiRJkiRJknSh/p8AAwDEtaFJ6ZU1lgAAAABJRU5ErkJggg==" transform="matrix(0.211 0 0 0.2111 62.1787 118.5391)">
+kiRJkiRJkiRJkiRJknSh/p8AAwDEtaFJ6ZU1lgAAAABJRU5ErkJggg==" sodipodi:absref="/Users/davidcox/Repositories/mcb80x/ap-propagation2/art/2C521EBB09EBA417.png" transform="matrix(0.211 0 0 0.2111 62.1787 118.5391)">
 		</image>
 		<g id="g3904">
 			
-				<circle id="circle3906" sodipodi:cx="122.087" sodipodi:cy="178.452" sodipodi:ry="45.425999" sodipodi:rx="45.425999" fill="#FFFFFF" cx="122.087" cy="178.452" r="45.426">
+				<circle id="circle3906" sodipodi:cx="122.087" sodipodi:ry="45.425999" sodipodi:cy="178.452" sodipodi:rx="45.425999" fill="#FFFFFF" cx="122.087" cy="178.452" r="45.426">
 			</circle>
 			
-				<circle id="circle3908" sodipodi:cx="122.087" sodipodi:cy="178.452" sodipodi:ry="45.425999" sodipodi:rx="45.425999" fill="none" stroke="#020202" stroke-width="4.7695" stroke-miterlimit="10" cx="122.087" cy="178.452" r="45.426">
+				<circle id="circle3908" sodipodi:cx="122.087" sodipodi:ry="45.425999" sodipodi:cy="178.452" sodipodi:rx="45.425999" fill="none" stroke="#020202" stroke-width="4.7695" stroke-miterlimit="10" cx="122.087" cy="178.452" r="45.426">
 			</circle>
 		</g>
 	</g>
@@ -2122,7 +2123,7 @@ EiRJkqDpvM/0E48X200fW2AkSYIkSRIwPeizfsecpCv9/e3/QpE+OJIkSJIkQZOOAZfTbBgTFEmS
 IEmSpIuB0ycfI85ypQREkiRIkiTpAeB01+PIVfJ3BESSJEiSJOmDwanrGHS3RGUBkSQJkiRJEjx9
 tARDkiRIkiRJ8CQYkiRJkCRJkiBKECRJkiBJkiTp4TAlAJIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
 SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
-SZIkSZIkSZIkSZJ8/R8BBgDeXtOOvZV+VQAAAABJRU5ErkJggg==" transform="matrix(0.2143 0 0 0.2143 146.1386 -69.4937)">
+SZIkSZIkSZIkSZJ8/R8BBgDeXtOOvZV+VQAAAABJRU5ErkJggg==" sodipodi:absref="/Users/davidcox/Repositories/mcb80x/ap-propagation2/art/2C521EBB09EBA410.png" transform="matrix(0.2143 0 0 0.2143 146.1377 -69.4937)">
 		</image>
 		
 			<image overflow="visible" opacity="0.39" enable-background="new    " width="585" height="585" id="image3902_4_" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkkAAAJJCAYAAAC+gKM0AAAACXBIWXMAADNdAAAzXQHqxsqSAAAA
@@ -2715,14 +2716,14 @@ EiRJkqDpvM/0E48X200fW2AkSYIkSRIwPeizfsecpCv9/e3/QpE+OJIkSJIkQZOOAZfTbBgTFEmS
 IEmSpIuB0ycfI85ypQREkiRIkiTpAeB01+PIVfJ3BESSJEiSJOmDwanrGHS3RGUBkSQJkiRJEjx9
 tARDkiRIkiRJ8CQYkiRJkCRJkiBKECRJkiBJkiTp4TAlAJIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
 SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
-SZIkSZIkSZIkSZJ8/R8BBgDeXtOOvZV+VQAAAABJRU5ErkJggg==" transform="matrix(0.2143 0 0 0.2143 146.1386 -69.4937)">
+SZIkSZIkSZIkSZJ8/R8BBgDeXtOOvZV+VQAAAABJRU5ErkJggg==" sodipodi:absref="/Users/davidcox/Repositories/mcb80x/ap-propagation2/art/2C521EBB09EBA41E.png" transform="matrix(0.2143 0 0 0.2143 146.1377 -69.4937)">
 		</image>
 		<g id="g3904_1_">
 			
-				<circle id="circle3906_1_" sodipodi:cx="206.048" sodipodi:cy="-9.5830002" sodipodi:ry="45.425999" sodipodi:rx="45.425999" fill="#010101" stroke="#F5EB28" stroke-width="4.7695" stroke-miterlimit="10" cx="206.048" cy="-9.583" r="45.426">
+				<circle id="circle3906_1_" sodipodi:cx="206.048" sodipodi:ry="45.425999" sodipodi:cy="-9.5830002" sodipodi:rx="45.425999" fill="#010101" stroke="#F5EB28" stroke-width="4.7695" stroke-miterlimit="10" cx="206.048" cy="-9.583" r="45.426">
 			</circle>
 			
-				<circle id="circle3908_1_" sodipodi:cx="206.048" sodipodi:cy="-9.5830002" sodipodi:ry="45.425999" sodipodi:rx="45.425999" fill="#020202" stroke="#F5EB28" stroke-width="4.7695" stroke-miterlimit="10" cx="206.048" cy="-9.583" r="45.426">
+				<circle id="circle3908_1_" sodipodi:cx="206.048" sodipodi:ry="45.425999" sodipodi:cy="-9.5830002" sodipodi:rx="45.425999" fill="#020202" stroke="#F5EB28" stroke-width="4.7695" stroke-miterlimit="10" cx="206.048" cy="-9.583" r="45.426">
 			</circle>
 		</g>
 	</g>
@@ -2738,6 +2739,8 @@ SZIkSZIkSZIkSZJ8/R8BBgDeXtOOvZV+VQAAAABJRU5ErkJggg==" transform="matrix(0.2143 0
 <rect id="XVPlot" x="246.5" y="573.866" fill="none" stroke="#ED1D2B" stroke-width="1.1797" stroke-miterlimit="10" width="923" height="76.496"/>
 <g id="Layer_2">
 </g>
-<rect id="propertiesRect" x="340.113" y="73.027" inkscape:label="#propertiesRect" fill="none" stroke="#FF0000" stroke-width="0.8593" width="385.028" height="240.761">
+<rect id="propertiesRect" x="340.113" y="73.027" inkscape:label="#propertiesRect" fill="none" stroke="#FF0000" stroke-width="0.8593" width="385.024" height="240.761">
 </rect>
+<polygon id="star" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="33.5,408.016 26.336,405.245 19.992,409.576 
+	20.413,401.907 14.333,397.212 21.758,395.242 24.344,388.01 28.512,394.462 36.19,394.688 31.341,400.644 "/>
 </svg>

@@ -16,6 +16,7 @@ class ApPropagation2 extends mcb80x.ViewModel
     constructor: ->
         @duration = ko.observable(10.0)
 
+
     # ----------------------------------------------------
     # Set up the simulation
     # ----------------------------------------------------
@@ -49,15 +50,21 @@ class ApPropagation2 extends mcb80x.ViewModel
         svgbind.bindVisible('#myelin', @myelinated)
         @myelinated.subscribe( (v) => @myelinate(v))
 
+        svgbind.bindSlider('#star',
+                             '#sliderBox',
+                             'h',
+                             @pulseAmplitude,
+                             d3.scale.linear().domain([0,1]).range([100, 200]))
 
         @setup()
 
 
     setup: ->
         # Build a square-wave pulse object (to connect to the compartment 0)
-        @pulse = mcb80x.sim.SquareWavePulse().interval([1.0, 1.5])
+        @pulse = mcb80x.sim.CurrentPulse()
                                  .I_stim(@sim.compartments[0].I_ext)
                                  .t(@sim.t)
+
         @pulse.amplitude = @pulseAmplitude
 
         # ------------------------------------------------------
@@ -69,7 +76,8 @@ class ApPropagation2 extends mcb80x.ViewModel
         @inheritProperties(@sim)
         @inheritProperties(@pulse, ['stimOn'])
 
-        svgbind.bindMultiState({'#stimOff': false, '#stimOn': true}, @stimOn)
+        svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', @stimOn)
+        #svgbind.bindMultiState({'#stimOff': false, '#stimOn': true}, @stimOn)
 
         # Set the html-based Knockout.js bindings in motion
         # This will allow templated 'data-bind' directives to automagically control the simulation / views
@@ -120,10 +128,6 @@ class ApPropagation2 extends mcb80x.ViewModel
 
             @xvPath.data([@sim.v()]).attr('d', @xvLine)
 
-            if @sim.t() >= @maxSimTime
-                @sim.reset()
-                scope.reset() for scope in @oscopes
-                @iterations += 1
 
         @updateTimer = setInterval(update, 10)
 
@@ -177,7 +181,7 @@ class ApPropagation2 extends mcb80x.ViewModel
 
     hide: ->
         @runSimulation = false
-        d3.select('#art').transition().style('opacity', 0.0).duration(1000)
+        d3.select('#interactive').transition().style('opacity', 0.0).duration(1000)
 
 
 root = window ? exports
