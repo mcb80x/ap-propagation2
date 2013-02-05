@@ -15,6 +15,12 @@ class ApPropagation2 extends mcb80x.ViewModel
 
     constructor: ->
         @duration = ko.observable(10.0)
+        @stimCompIndex = ko.observable(0)
+        @voltageClamped = ko.observable(false)
+        @clampVoltage = ko.observable(-65.0)
+
+        @XVPlotVRange = [-80, 50]
+
 
 
     # ----------------------------------------------------
@@ -36,6 +42,7 @@ class ApPropagation2 extends mcb80x.ViewModel
 
         @pulseAmplitude = ko.observable(180.0)
         @myelinated = ko.observable(0)
+        @clampVoltage = ko.observable(-65.0)
 
         @xvPath = @svg.append('path')
 
@@ -50,22 +57,34 @@ class ApPropagation2 extends mcb80x.ViewModel
         svgbind.bindVisible('#myelin', @myelinated)
         @myelinated.subscribe( (v) => @myelinate(v))
 
-        svgbind.bindSlider('#star',
-                             '#sliderBox',
-                             'h',
-                             @pulseAmplitude,
-                             d3.scale.linear().domain([0,1]).range([100, 200]))
+        svgbind.bindSlider('#vKnob',
+                            '#XVPlot',
+                            'v',
+                            @clampVoltage,
+                            d3.scale.linear().domain([0,1]).range(@XVPlotVRange))
+
+        svgbind.bindVisible('#vKnob', @voltageClamped)
+        @voltageClamped.subscribe( => @setup() )
+
+        svgbind.bindMultiState({'#VoltageClamp':true, '#CurrentStimulator':false}, @voltageClamped)
+
+        # Build a square-wave pulse object (to connect to the compartment 0)
+        stimCompartment = @sim.compartments[@stimCompIndex()]
+        @pulse = mcb80x.sim.CurrentPulse()
+                                 .I_stim(stimCompartment.I_ext)
+                                 .t(@sim.t)
+
+        @pulse.amplitude = @pulseAmplitude
+
+        @inheritProperties(@pulse, ['stimOn'])
+
+        svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', @stimOn)
+
 
         @setup()
 
 
     setup: ->
-        # Build a square-wave pulse object (to connect to the compartment 0)
-        @pulse = mcb80x.sim.CurrentPulse()
-                                 .I_stim(@sim.compartments[0].I_ext)
-                                 .t(@sim.t)
-
-        @pulse.amplitude = @pulseAmplitude
 
         # ------------------------------------------------------
         # Bind variables from the compartment simulations to the
@@ -74,10 +93,25 @@ class ApPropagation2 extends mcb80x.ViewModel
 
         # Connect up the compartment model
         @inheritProperties(@sim)
-        @inheritProperties(@pulse, ['stimOn'])
 
-        svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', @stimOn)
-        #svgbind.bindMultiState({'#stimOff': false, '#stimOn': true}, @stimOn)
+        stimCompartment = @sim.compartments[@stimCompIndex()]
+
+        # stimCompartment.voltageClamped(@voltageClamped())
+
+
+        if @voltageClamped()
+            stimCompartment.voltageClamped(true)
+            stimCompartment.clampVoltage(@clampVoltage)
+            console.log('applying voltage clamp')
+
+        else
+            stimCompartment.voltageClamped(false)
+            console.log('clearing voltage clamp: ' + stimCompartment.voltageClamped())
+
+            @pulse.I_stim(stimCompartment.I_ext)
+
+
+
 
         # Set the html-based Knockout.js bindings in motion
         # This will allow templated 'data-bind' directives to automagically control the simulation / views
@@ -104,7 +138,7 @@ class ApPropagation2 extends mcb80x.ViewModel
 
         nCompartments = @sim.compartments.length
         @xScale = d3.scale.linear().domain([0, nCompartments]).range([xvbbox.x, xvbbox.x + xvbbox.width])
-        @vScale = d3.scale.linear().domain([-80, 50]).range([xvbbox.y+xvbbox.height, xvbbox.y])
+        @vScale = d3.scale.linear().domain(@XVPlotVRange).range([xvbbox.y+xvbbox.height, xvbbox.y])
 
 
         @xvLine = d3.svg.line()
@@ -138,6 +172,7 @@ class ApPropagation2 extends mcb80x.ViewModel
 
 
     myelinate: (v) ->
+
         @stop()
 
         if v
@@ -153,8 +188,10 @@ class ApPropagation2 extends mcb80x.ViewModel
             $('#CSlider').slider('disable')
 
         @setup()
-
         @play()
+
+
+
 
     # Main initialization function; triggered after the SVG doc is
     # loaded

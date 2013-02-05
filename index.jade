@@ -31,13 +31,17 @@ html
           br
           div#CSlider(data-bind="slider: C_m, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}")
 
-          label Pulse Current:
-            span(data-bind='text: pulseAmplitude')
-          br
-          div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 200.0, range: false, step: 10}")
+          //- label Pulse Current:
+          //-   span(data-bind='text: pulseAmplitude')
+          //- br
+          //- div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 200.0, range: false, step: 10}")
 
           label Myelinated:
           input(type='checkbox', data-bind='checked: myelinated')
+
+          br
+          label Voltage Clamped:
+          input(type='checkbox', data-bind='checked: voltageClamped')
 
 
       #video
