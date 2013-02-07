@@ -11,9 +11,11 @@
 #<< mcb80x/lesson_plan
 
 
-class ApPropagation2 extends mcb80x.ViewModel
+class ApPropagation2 extends mcb80x.InteractiveSVG
 
     constructor: ->
+
+        # Some knockout.js bindings to marionette the interactive
         @duration = ko.observable(10.0)
         @stimCompIndex = ko.observable(0)
         @voltageClamped = ko.observable(false)
@@ -86,6 +88,11 @@ class ApPropagation2 extends mcb80x.ViewModel
         @pulse.amplitude = @pulseAmplitude
         @inheritProperties(@pulse, ['stimOn'])
         svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', @stimOn)
+
+        @stimOn.subscribe((v) =>
+            if v
+                @iterations += 1
+        )
 
 
         # Questions
@@ -165,6 +172,8 @@ class ApPropagation2 extends mcb80x.ViewModel
 
 
     play: ->
+
+        @iterations = 0
         update = =>
 
             # Update the simulation
@@ -204,41 +213,6 @@ class ApPropagation2 extends mcb80x.ViewModel
         @play()
 
 
-
-
-    # Main initialization function; triggered after the SVG doc is
-    # loaded
-    svgDocumentReady: (xml) ->
-
-        # transition out the video if it's visible
-        # d3.select('#video').transition().style('opacity', 0.0).duration(1000)
-
-        # Attach the SVG to the DOM in the appropriate place
-        importedNode = document.importNode(xml.documentElement, true)
-
-        d3.select('#art').node().appendChild(importedNode)
-        d3.select('#art').transition().style('opacity', 1.0).duration(1000)
-
-        @svg = d3.select(importedNode)
-        @svg.attr('width', '100%')
-        @svg.attr('height', '100%')
-
-        @init()
-
-    showElement: (s) ->
-        console.log('showing ' + s)
-        util.showElement(d3.select(s), 250)
-
-    hideElement: (s) ->
-        console.log('hiding ' + s)
-        util.hideElement(d3.select(s), 250)
-
-    show: ->
-        d3.xml('svg/ap_propagation2.svg', 'image/svg+xml', (xml) => @svgDocumentReady(xml))
-
-    hide: ->
-        @runSimulation = false
-        d3.select('#interactive').transition().style('opacity', 0.0).duration(1000)
 
 
 root = window ? exports
