@@ -22,15 +22,11 @@ class ApPropagation2 extends mcb80x.ViewModel
         @pulseAmplitude = ko.observable(180.0)
         @myelinated = ko.observable(0)
 
-
         @XVPlotVRange = [-80, 50]
 
-        @XVGraphVisible = ko.observable(false)
-        @OscilloscopeVisible = ko.observable(false)
-        @StimulatorVisible = ko.observable(false)
-        @AxonVisible = ko.observable(false)
-        @OscilloscopeVisible = ko.observable(false)
-        @PropertiesVisible = ko.observable(false)
+        # Observables to store answers to questions
+        @Q1 = ko.observable('none')
+        @Q2 = ko.observable('none')
 
 
     # ----------------------------------------------------
@@ -50,27 +46,24 @@ class ApPropagation2 extends mcb80x.ViewModel
         @sim = @unmyelinatedSim
         @sim.R_a(0.25)
 
-        @xvPath = d3.select('#XVGraph').append('path')
-        # @xvPath = @svg.append('path')
 
-        # # Make an oscilloscope and attach it to the svg
+        # Oscilloscope
         @oscopes = []
         @oscopes.push oscilloscope('#art svg', '#oscope1')
 
 
-        # Float a div over a rect in the svg
+        # Properties
         #util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
 
+        # Myelin
         svgbind.bindVisible('#myelin', @myelinated)
         @myelinated.subscribe( (v) => @myelinate(v))
 
-        svgbind.bindVisible('#XVGraph', @XVGraphVisible)
-        svgbind.bindVisible('#RecordingOscilloscope', @OscilloscopeVisible)
-        svgbind.bindVisible('#Stimulator', @StimulatorVisible)
-        svgbind.bindVisible('#Axon', @AxonVisible)
 
-        svgbind.bindVisible('#floaty', @PropertiesVisible)
+        # XV Plot
+        @xvPath = d3.select('#XVGraph').append('path')
 
+        # Voltage Clamp
         svgbind.bindSlider('#vKnob',
                             '#XVPlot',
                             'v',
@@ -82,6 +75,8 @@ class ApPropagation2 extends mcb80x.ViewModel
 
         svgbind.bindMultiState({'#VoltageClamp':true, '#CurrentStimulator':false}, @voltageClamped)
 
+
+        # Stimulator
         # Build a square-wave pulse object (to connect to the compartment 0)
         stimCompartment = @sim.compartments[@stimCompIndex()]
         @pulse = mcb80x.sim.CurrentPulse()
@@ -89,11 +84,18 @@ class ApPropagation2 extends mcb80x.ViewModel
                                  .t(@sim.t)
 
         @pulse.amplitude = @pulseAmplitude
-
         @inheritProperties(@pulse, ['stimOn'])
-
         svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', @stimOn)
 
+
+        # Questions
+        svgbind.bindMultipleChoice(
+            '#Q1A': 'a'
+            '#Q1B': 'b'
+            '#Q1C': 'c'
+            '#Q1D': 'd',
+            @Q1
+        )
 
         @setup()
 
@@ -223,6 +225,13 @@ class ApPropagation2 extends mcb80x.ViewModel
 
         @init()
 
+    showElement: (s) ->
+        console.log('showing ' + s)
+        util.showElement(d3.select(s), 250)
+
+    hideElement: (s) ->
+        console.log('hiding ' + s)
+        util.hideElement(d3.select(s), 250)
 
     show: ->
         d3.xml('svg/ap_propagation2.svg', 'image/svg+xml', (xml) => @svgDocumentReady(xml))
