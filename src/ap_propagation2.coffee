@@ -19,8 +19,18 @@ class ApPropagation2 extends mcb80x.ViewModel
         @voltageClamped = ko.observable(false)
         @clampVoltage = ko.observable(-65.0)
 
+        @pulseAmplitude = ko.observable(180.0)
+        @myelinated = ko.observable(0)
+
+
         @XVPlotVRange = [-80, 50]
 
+        @XVGraphVisible = ko.observable(false)
+        @OscilloscopeVisible = ko.observable(false)
+        @StimulatorVisible = ko.observable(false)
+        @AxonVisible = ko.observable(false)
+        @OscilloscopeVisible = ko.observable(false)
+        @PropertiesVisible = ko.observable(false)
 
 
     # ----------------------------------------------------
@@ -40,11 +50,8 @@ class ApPropagation2 extends mcb80x.ViewModel
         @sim = @unmyelinatedSim
         @sim.R_a(0.25)
 
-        @pulseAmplitude = ko.observable(180.0)
-        @myelinated = ko.observable(0)
-        @clampVoltage = ko.observable(-65.0)
-
-        @xvPath = @svg.append('path')
+        @xvPath = d3.select('#XVGraph').append('path')
+        # @xvPath = @svg.append('path')
 
         # # Make an oscilloscope and attach it to the svg
         @oscopes = []
@@ -52,10 +59,17 @@ class ApPropagation2 extends mcb80x.ViewModel
 
 
         # Float a div over a rect in the svg
-        util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
+        #util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
 
         svgbind.bindVisible('#myelin', @myelinated)
         @myelinated.subscribe( (v) => @myelinate(v))
+
+        svgbind.bindVisible('#XVGraph', @XVGraphVisible)
+        svgbind.bindVisible('#RecordingOscilloscope', @OscilloscopeVisible)
+        svgbind.bindVisible('#Stimulator', @StimulatorVisible)
+        svgbind.bindVisible('#Axon', @AxonVisible)
+
+        svgbind.bindVisible('#floaty', @PropertiesVisible)
 
         svgbind.bindSlider('#vKnob',
                             '#XVPlot',
@@ -64,7 +78,7 @@ class ApPropagation2 extends mcb80x.ViewModel
                             d3.scale.linear().domain([0,1]).range(@XVPlotVRange))
 
         svgbind.bindVisible('#vKnob', @voltageClamped)
-        @voltageClamped.subscribe( => @setup() )
+        @voltageClamped.subscribe( => @stop(); @setup(); @play() )
 
         svgbind.bindMultiState({'#VoltageClamp':true, '#CurrentStimulator':false}, @voltageClamped)
 
@@ -109,8 +123,7 @@ class ApPropagation2 extends mcb80x.ViewModel
             console.log('clearing voltage clamp: ' + stimCompartment.voltageClamped())
 
             @pulse.I_stim(stimCompartment.I_ext)
-
-
+            # stimCompartment.I_ext(@pulse.I_stim)
 
 
         # Set the html-based Knockout.js bindings in motion
@@ -122,8 +135,6 @@ class ApPropagation2 extends mcb80x.ViewModel
         # ------------------------------------------------------
         oscopeCompartment = @sim.compartments[32]
         @oscopes[0].data(=> [@sim.t(), oscopeCompartment.v()])
-        # @oscopes[1] = oscilloscope('#art svg', '#oscope2').data(=> [@sim.t(), @sim.v1()])
-        # @oscopes[2] = oscilloscope('#art svg', '#oscope3').data(=> [@sim.t(), @sim.v2()])
 
         @maxSimTime = 30.0 # ms
         for scope in @oscopes
