@@ -15,52 +15,107 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
 
     constructor: ->
 
-        # Some knockout.js bindings to marionette the interactive
-        @duration = ko.observable(10.0)
-        @stimCompIndex = ko.observable(0)
-        @voltageClamped = ko.observable(false)
-        @clampVoltage = ko.observable(-65.0)
+        # Defer SVG marionetting stuff to base class
+        super('svg/ap_propagation2.svg')
 
-        @pulseAmplitude = ko.observable(180.0)
-        @myelinated = ko.observable(0)
+        # Some knockout.js custom bindings to marionette the interactive
+
+        # what kind of simulation
+        @myelinated = @prop false
+        @resistanceOnly = @prop false
+        @passiveOnly = @prop false
+        @voltageClamped = @prop false
+
+        @duration = @prop 10.0 # an estimate
+        @stimCompartmentIndex = @prop 0 # which compartment to stimulate
+
+        @clampVoltage = @prop -65.0
+        @pulseAmplitude = @prop 180.0
 
         @XVPlotVRange = [-80, 50]
 
-        # Observables to store answers to questions
-        @Q1 = ko.observable('none')
-        @Q2 = ko.observable('none')
+        # show or hide the properties panel
+        @propertiesVisible = @prop false
 
-
-    # ----------------------------------------------------
-    # Set up the simulation
-    # ----------------------------------------------------
-
-    init: ->
+        # Properties to store answers to questions
+        @Q1 = @prop 'none'
+        @Q2 = @prop 'none'
 
         # ------------------------------------------------------
         # Simulation components
         # ------------------------------------------------------
 
-        # Build a linear compartment model with 4 compartments
-        @myelinatedSim = mcb80x.sim.MyelinatedLinearCompartmentModel(24, 4).C_m(0.9)
-        @unmyelinatedSim = mcb80x.sim.LinearCompartmentModel(36).C_m(1.1)
+        @sim = undefined
+        @pulse = undefined
 
-        @sim = @unmyelinatedSim
+    connectStimulator: ->
+
+        # Stimulator
+
+        # Build a square-wave pulse object (to connect to the compartment 0)
+        stimCompartment = @sim.compartments[@stimCompartmentIndex()]
+        @pulse.I_stim(stimCompartment.I_ext)
+
+        # attach the voltage clamp stimulator as well; only one stimulator will
+        # actually be active at a time
+        stimCompartment.voltageClamped(@voltageClamped)
+        stimCompartment.clampVoltage(@clampVoltage)
+
+
+    init: ->
+
+        # ----------------------------------------------------
+        # Set up the simulation
+        # ----------------------------------------------------
+
+        # Build a linear compartment model with 31 compartments and
+        # 6 "nodes".  In the case of an unmyelinated simulation, the
+        # node designation has no meaning
+        @sim = mcb80x.sim.MyelinatedLinearCompartmentModel(31, 6)
+
         @sim.R_a(0.25)
+        @sim.C_node(1.0)
+        @sim.C_internode(0.7)
 
+        if @myelinated()
+            @sim.passiveInternodes(true)
+        else
+            @sim.passiveInternodes(false)
+
+
+        if @resistanceOnly()
+            @sim.passiveInternodes(true)
+            @sim.passiveNodes(true)
+            @sim.C_node(0.0)
+            @sim.C_internode(0.0)
+
+        else if @passiveOnly()
+            @sim.passiveInternodes(true)
+            @sim.passiveNodes(true)
+
+
+        @pulse = mcb80x.sim.CurrentPulse().t(@sim.t)
+        @pulse.amplitude = @pulseAmplitude
+
+        @connectStimulator()
+
+
+        # Take on all of the properties from the sim object
+        # allowing them to be accessed as properties on this object
+        @inheritProperties(@sim)
+
+
+        # ----------------------------------------------------
+        # Set up UI elements
+        # ----------------------------------------------------
 
         # Oscilloscope
-        @oscopes = []
-        @oscopes.push oscilloscope('#art svg', '#oscope1')
 
-
-        # Properties
-        #util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
+        # Properties panel
+        util.floatOverRect('#art svg', '#propertiesRect', '#floaty')
 
         # Myelin
         svgbind.bindVisible('#myelin', @myelinated)
-        @myelinated.subscribe( (v) => @myelinate(v))
-
 
         # XV Plot
         @xvPath = d3.select('#XVGraph').append('path')
@@ -73,19 +128,12 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
                             d3.scale.linear().domain([0,1]).range(@XVPlotVRange))
 
         svgbind.bindVisible('#vKnob', @voltageClamped)
-        @voltageClamped.subscribe( => @stop(); @setup(); @play() )
+        # @voltageClamped.subscribe( => @stop(); @setup(); @play() )
 
         svgbind.bindMultiState({'#VoltageClamp':true, '#CurrentStimulator':false}, @voltageClamped)
 
 
-        # Stimulator
-        # Build a square-wave pulse object (to connect to the compartment 0)
-        stimCompartment = @sim.compartments[@stimCompIndex()]
-        @pulse = mcb80x.sim.CurrentPulse()
-                                 .I_stim(stimCompartment.I_ext)
-                                 .t(@sim.t)
 
-        @pulse.amplitude = @pulseAmplitude
         @inheritProperties(@pulse, ['stimOn'])
         svgbind.bindAsMomentaryButton('#stimOn', '#stimOff', @stimOn)
 
@@ -104,45 +152,19 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
             @Q1
         )
 
-        @setup()
-
-
-    setup: ->
-
-        # ------------------------------------------------------
-        # Bind variables from the compartment simulations to the
-        # view model and to each other
-        # ------------------------------------------------------
-
-        # Connect up the compartment model
-        @inheritProperties(@sim)
-
-        stimCompartment = @sim.compartments[@stimCompIndex()]
-
-        # stimCompartment.voltageClamped(@voltageClamped())
-
-
-        if @voltageClamped()
-            stimCompartment.voltageClamped(true)
-            stimCompartment.clampVoltage(@clampVoltage)
-            console.log('applying voltage clamp')
-
-        else
-            stimCompartment.voltageClamped(false)
-            console.log('clearing voltage clamp: ' + stimCompartment.voltageClamped())
-
-            @pulse.I_stim(stimCompartment.I_ext)
-            # stimCompartment.I_ext(@pulse.I_stim)
-
-
         # Set the html-based Knockout.js bindings in motion
         # This will allow templated 'data-bind' directives to automagically control the simulation / views
         ko.applyBindings(this)
 
         # ------------------------------------------------------
-        # Oscilloscopes!
+        # Plotting
         # ------------------------------------------------------
-        oscopeCompartment = @sim.compartments[32]
+
+        # Oscilloscopes
+        @oscopes = []
+        @oscopes.push oscilloscope('#art svg', '#oscope1')
+
+        oscopeCompartment = @sim.compartments[25]
         @oscopes[0].data(=> [@sim.t(), oscopeCompartment.v()])
 
         @maxSimTime = 30.0 # ms
@@ -152,6 +174,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @iterations = 0
         @updateTimer = undefined
 
+        # Distance vs. Voltage Plot
         @xvplot = d3.select('#XVPlot')
         @xvplot.attr('opacity', 0.0)
         xvbbox = @xvplot.node().getBBox()
@@ -193,27 +216,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         scope.reset() for scope in @oscopes
 
 
-    myelinate: (v) ->
-
-        @stop()
-
-        if v
-            @sim = @myelinatedSim
-            @sim.R_a(0.35)
-            @sim.C_m(0.5)
-            $('#CSlider').slider('enable')
-
-        else
-            @sim = @unmyelinatedSim
-            @sim.R_a(0.45)
-            @sim.C_m(1.1)
-            $('#CSlider').slider('disable')
-
-        @setup()
-        @play()
-
-
 
 
 root = window ? exports
-root.stages.approp2 = new ApPropagation2()
+root.stages.approp2 = () -> new ApPropagation2()
