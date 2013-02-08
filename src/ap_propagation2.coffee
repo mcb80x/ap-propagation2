@@ -21,25 +21,25 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # Some knockout.js custom bindings to marionette the interactive
 
         # what kind of simulation
-        @myelinated = @prop false
-        @resistanceOnly = @prop false
-        @passiveOnly = @prop false
-        @voltageClamped = @prop false
+        @myelinated = ko.observable false
+        @resistanceOnly = ko.observable false
+        @passiveOnly = ko.observable false
+        @voltageClamped = ko.observable false
 
-        @duration = @prop 10.0 # an estimate
-        @stimCompartmentIndex = @prop 0 # which compartment to stimulate
+        @duration = ko.observable 10.0 # an estimate
+        @stimCompartmentIndex = ko.observable 0 # which compartment to stimulate
 
-        @clampVoltage = @prop -65.0
-        @pulseAmplitude = @prop 180.0
+        @clampVoltage = ko.observable -65.0
+        @pulseAmplitude = ko.observable 180.0
 
         @XVPlotVRange = [-80, 50]
 
         # show or hide the properties panel
-        @propertiesVisible = @prop false
+        @propertiesVisible = ko.observable false
 
         # Properties to store answers to questions
-        @Q1 = @prop 'none'
-        @Q2 = @prop 'none'
+        @Q1 = ko.observable 'none'
+        @Q2 = ko.observable 'none'
 
         # ------------------------------------------------------
         # Simulation components
@@ -73,26 +73,13 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # node designation has no meaning
         @sim = mcb80x.sim.MyelinatedLinearCompartmentModel(31, 6)
 
-        @sim.R_a(0.25)
-        @sim.C_node(1.0)
-        @sim.C_internode(0.7)
 
-        if @myelinated()
-            @sim.passiveInternodes(true)
-        else
-            @sim.passiveInternodes(false)
+        @updateSimulationParameters()
 
-
-        if @resistanceOnly()
-            @sim.passiveInternodes(true)
-            @sim.passiveNodes(true)
-            @sim.C_node(0.0)
-            @sim.C_internode(0.0)
-
-        else if @passiveOnly()
-            @sim.passiveInternodes(true)
-            @sim.passiveNodes(true)
-
+        @myelinated.subscribe(=> @updateSimulationParameters())
+        @voltageClamped.subscribe(=> @updateSimulationParameters())
+        @passiveOnly.subscribe(=> @updateSimulationParameters())
+        @resistanceOnly.subscribe(=> @updateSimulationParameters())
 
         @pulse = mcb80x.sim.CurrentPulse().t(@sim.t)
         @pulse.amplitude = @pulseAmplitude
@@ -164,7 +151,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @oscopes = []
         @oscopes.push oscilloscope('#art svg', '#oscope1')
 
-        oscopeCompartment = @sim.compartments[25]
+        oscopeCompartment = @sim.compartments[24]
         @oscopes[0].data(=> [@sim.t(), oscopeCompartment.v()])
 
         @maxSimTime = 30.0 # ms
@@ -193,6 +180,34 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
             .attr('class', 'xv-line')
             .attr('d', @xvLine)
 
+
+    updateSimulationParameters: ->
+        console.log('updating simulation')
+        if @myelinated()
+            @sim.passiveInternodes(true)
+            @sim.R_a(0.1)
+            @sim.C_node(1.0)
+            @sim.C_internode(0.4)
+        else
+            @sim.passiveInternodes(false)
+            @sim.R_a(0.25)
+            @sim.C_node(1.0)
+            @sim.C_internode(@sim.C_node())
+
+        if @resistanceOnly()
+            @sim.passiveInternodes(true)
+            @sim.passiveNodes(true)
+            @sim.resistanceOnly(true)
+
+        else if @passiveOnly()
+            @sim.passiveInternodes(true)
+            @sim.passiveNodes(true)
+
+
+
+    hide: (cb) ->
+        @propertiesVisible(false)
+        super(cb)
 
     play: ->
 

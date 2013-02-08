@@ -7,16 +7,18 @@
 scene('Action Potential Generation', 'ap_propagation2') ->
 
 
-    interactive('A test') ->
-        stage 'approp2',
-            myelinated: false
-            propertiesVisible: true
+    # interactive('A test') ->
+    #     stage 'approp2',
+    #         myelinated: true
+    #         propertiesVisible: true
+    #         voltageClamped: true
+    #         resistanceOnly: false
 
-        show 'Axon', 'RecordingOscilloscope', 'Stimulator', 'XVGraph'
+    #     show 'Axon', 'RecordingOscilloscope', 'Stimulator', 'XVGraph'
 
-        play '*'
+    #     play '*'
 
-        wait 1000000
+    #     wait 1000000
 
     interactive('Introducing action potential propagation') ->
         stage 'approp2',
@@ -33,28 +35,32 @@ scene('Action Potential Generation', 'ap_propagation2') ->
         wait 500
 
         line 'DR-100_0125.wav',
-            "Let's consider a length of axon"
+            "Let's consider a length of axon",
+            ->
+                show 'Axon'
 
-        show 'Axon'
         wait 1000
 
-        show 'cellBodyArrowSign'
-
         line 'DR-100_0127.wav',
-            "The cell body would be ..."
+            "The cell body would be ...",
+            ->
+                show 'cellBodyArrowSign'
+                wait 1000
+                show 'targetArrowSign'
 
-        show 'targetArrowSign'
         wait 2000
 
-        show 'RecordingOscilloscope'
         hide 'targetArrowSign', 'cellBodyArrowSign'
         line 'DR-100_0128.wav',
-            "We'll give you an oscilloscope ..."
+            "We'll give you an oscilloscope ...",
+            ->
+                show 'RecordingOscilloscope'
 
 
-        show 'Stimulator'
         line 'DR-100_0130.wav',
-            "And we'll give you a stimulating ..."
+            "And we'll give you a stimulating ...",
+            ->
+                show 'Stimulator'
 
         wait 250
         show 'HodgkinAndHuxley'
