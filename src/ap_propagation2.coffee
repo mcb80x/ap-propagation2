@@ -25,6 +25,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @resistanceOnly = ko.observable false
         @passiveOnly = ko.observable false
         @voltageClamped = ko.observable false
+        @activeStimCompartmentOnly = ko.observable false
 
         @duration = ko.observable 10.0 # an estimate
         @stimCompartmentIndex = ko.observable 0 # which compartment to stimulate
@@ -85,6 +86,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @voltageClamped.subscribe(=> @updateSimulationParameters())
         @passiveOnly.subscribe(=> @updateSimulationParameters())
         @resistanceOnly.subscribe(=> @updateSimulationParameters())
+        @activeStimCompartmentOnly.subscribe(=> @updateSimulationParameters())
 
         @pulse = mcb80x.sim.CurrentPulse().t(@sim.t)
         @pulse.amplitude = @pulseAmplitude
@@ -206,25 +208,49 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
 
     updateSimulationParameters: ->
         console.log('updating simulation')
+
         if @myelinated()
             @sim.passiveInternodes(true)
+            @sim.passiveNodes(false)
+            @sim.passiveFirstNode(false)
             @sim.R_a(0.1)
             @sim.C_node(1.0)
             @sim.C_internode(0.4)
+            @sim.g_L_internode(0.1)
+            @sim.g_L_node(0.3)
         else
+            @sim.passiveFirstNode(false)
+            @sim.passiveNodes(false)
             @sim.passiveInternodes(false)
             @sim.R_a(0.25)
             @sim.C_node(1.0)
             @sim.C_internode(@sim.C_node())
+            @sim.g_L_internode(0.3)
+            @sim.g_L_node(0.3)
 
         if @resistanceOnly()
             @sim.passiveInternodes(true)
             @sim.passiveNodes(true)
+            @sim.passiveFirstNode(true)
             @sim.resistanceOnly(true)
+            @sim.R_a(1.5)
+            @sim.g_L_internode(0.3)
+            @sim.g_L_node(0.3)
 
         else if @passiveOnly()
             @sim.passiveInternodes(true)
             @sim.passiveNodes(true)
+            @sim.passiveFirstNode(true)
+            @sim.g_L_internode(0.3)
+            @sim.g_L_node(0.3)
+
+        else if @activeStimCompartmentOnly()
+            @sim.passiveInternodes(true)
+            @sim.passiveNodes(true)
+            @sim.passiveFirstNode(false)
+            @sim.g_L_internode(0.3)
+            @sim.g_L_node(0.3)
+
 
 
 
