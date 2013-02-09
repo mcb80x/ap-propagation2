@@ -12,6 +12,7 @@ scene('Action Potential Generation', 'ap_propagation2') ->
             propertiesVisible: false
             voltageClamped: false
             resistanceOnly: true
+            R_a: 1.0
 
         soundtrack 'imhotep.mp3'
         duration 10
@@ -41,7 +42,7 @@ scene('Action Potential Generation', 'ap_propagation2') ->
             "Now we'll give you a lever ....",
             ->
                 set_property 'voltageClamped', true
-                wait 5000
+                wait 7000
                 show 'Stimulator'
 
         line 'DR-100_0160.wav',
@@ -70,12 +71,19 @@ scene('Action Potential Generation', 'ap_propagation2') ->
 
         line 'DR-100_0169.wav',
             "Now let's give you a knob...",
+            ->
+                set_property 'propertiesVisible', true
+                set_property 'R_a_knob', true
+
 
         line 'DR-100_0170.wav',
             "What will happen if we lower the axial resistance?"
 
         line 'DR-100_0173.wav',
-            "Will the effect of the clamped voltage spead..."
+            "Will the effect of the clamped voltage spead...",
+            ->
+                hide 'Q2A', 'Q2B', 'Q2C'
+                show 'Q2'
 
         line 'DR-100_0174.wav',
             "a) Farther"
@@ -94,13 +102,10 @@ scene('Action Potential Generation', 'ap_propagation2') ->
 
 
         line 'DR-100_0177.wav',
-            "OK, let's put it to the test",
-            ->
-                wait 2000
-                set_property 'propertiesVisible', true
-                set_property 'R_a_knob', true
+            "OK, let's put it to the test"
 
         choice 'Q2'
+        hide 'Q2'
 
         line 'DR-100_0178.wav',
             "That's right, when we lower the axial resistance...",
@@ -120,6 +125,7 @@ scene('Action Potential Generation', 'ap_propagation2') ->
                 show 'nextButton'
 
         choice 'nextButton'
+        hide 'nextButton'
 
         line 'DR-100_0187.wav',
             "Did you notice how ...",
@@ -170,7 +176,9 @@ scene('Action Potential Generation', 'ap_propagation2') ->
 
         # todo re-record
         line 'DR-100_0203.wav',
-            "Would the distance versus... most look like:"
+            "Would the distance versus... most look like:",
+            ->
+                show 'Q3'
 
         line 'DR-100_0204.wav',
             "a) Basically the same shape",

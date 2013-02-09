@@ -40,6 +40,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # Properties to store answers to questions
         @Q1 = ko.observable 'none'
         @Q2 = ko.observable 'none'
+        @Q3 = ko.observable 'none'
 
         @nextButton = ko.observable false
         @R_a_knob = ko.observable false
@@ -141,6 +142,21 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
             '#Q1C': 'c'
             '#Q1D': 'd',
             @Q1
+        )
+
+        svgbind.bindMultipleChoice(
+            '#Q2A': 'a'
+            '#Q2B': 'b'
+            '#Q2C': 'c'
+            @Q2
+        )
+
+        svgbind.bindMultipleChoice(
+            '#Q3A': 'a'
+            '#Q3B': 'b'
+            '#Q3C': 'c'
+            '#Q3D': 'd',
+            @Q3
         )
 
         svgbind.bindAsMomentaryButton('#nextButtonOn', '#nextButtonOff', @nextButton)
