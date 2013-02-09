@@ -20,28 +20,30 @@ html
 
         #art
 
-        #floaty.properties-pane(data-bind="visible: propertiesVisible")
-          label Axial Resistance:
-            span(data-bind='text: R_a')
-          br
-          div(data-bind="slider: R_a, sliderOptions: {min: 0.35, max: 1.5, range: false, step: 0.05}")
+        #floaty.properties-pane(data-bind="visible: propertiesVisible", style="display: none;")
+          div(data-bind='visible: R_a_knob')
+            label Axial Resistance:
+              span(data-bind='text: R_a')
+            br
+            div(data-bind="slider: R_a, sliderOptions: {min: 0.35, max: 1.5, range: false, step: 0.05}")
 
-          label Membrane Capacitance:
-            span(data-bind='text: C_internode')
-          br
-          div#CSlider(data-bind="slider: C_internode, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}")
+          div(data-bind='visible: C_m_knob')
+            label Membrane Capacitance:
+              span(data-bind='text: C_internode')
+            br
+            div#CSlider(data-bind="slider: C_internode, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}")
 
           //- label Pulse Current:
           //-   span(data-bind='text: pulseAmplitude')
           //- br
           //- div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 200.0, range: false, step: 10}")
 
-          label Myelinated:
-          input(type='checkbox', data-bind='checked: myelinated')
+          //- label Myelinated:
+          //- input(type='checkbox', data-bind='checked: myelinated')
 
-          br
-          label Voltage Clamped:
-          input(type='checkbox', data-bind='checked: voltageClamped')
+          //- br
+          //- label Voltage Clamped:
+          //- input(type='checkbox', data-bind='checked: voltageClamped')
 
 
       #video

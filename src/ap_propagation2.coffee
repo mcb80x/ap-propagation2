@@ -41,6 +41,10 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @Q1 = ko.observable 'none'
         @Q2 = ko.observable 'none'
 
+        @nextButton = ko.observable false
+        @R_a_knob = ko.observable false
+        @C_m_knob = ko.observable false
+
         # ------------------------------------------------------
         # Simulation components
         # ------------------------------------------------------
@@ -139,8 +143,11 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
             @Q1
         )
 
+        svgbind.bindAsMomentaryButton('#nextButtonOn', '#nextButtonOff', @nextButton)
+
         # Set the html-based Knockout.js bindings in motion
         # This will allow templated 'data-bind' directives to automagically control the simulation / views
+
         ko.applyBindings(this)
 
         # ------------------------------------------------------

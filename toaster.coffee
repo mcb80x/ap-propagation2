@@ -9,7 +9,7 @@ toast 'src'
             'common/third-party/knockout-2.2.0.js',
             'common/third-party/jquery-ui-1.9.2.custom.js',
             'common/third-party/jquery.tipsy.js',
-            'common/third-party/soundmanager2-nodebug.js']
+            'common/third-party/soundmanager2.js']
 
   # => OPTIONS (optional, default values listed)
   # bare: false
