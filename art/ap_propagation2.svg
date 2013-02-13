@@ -3352,7 +3352,7 @@ gg==" transform="matrix(0.9989 0 0 0.9983 182.229 90.2295)">
 </g>
 <g id="Q3" display="none">
 	<rect id="veil_1_" display="inline" opacity="0.7" fill="#FFFFFF" enable-background="new    " width="1280" height="720"/>
-	<g id="solidBackdrop_1_" display="inline">
+	<g id="solidBackdrop_1_" display="inherit">
 		
 			<image overflow="visible" opacity="0.4" enable-background="new    " width="871" height="573" id="image345" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2cAAAI9CAYAAAC+KQBAAAAACXBIWXMAAAsSAAALEgHS3X78AAAA
 GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAEntJREFUeNrs3W1vIjkWgFEXgWR2
@@ -3449,7 +3449,7 @@ gg==" transform="matrix(0.9989 0 0 0.9983 182.229 90.2295)">
 	</g>
 	
 		<text id="Q3question" transform="matrix(1 0 0 1 240.5 164.5)" display="inline" font-family="'MyriadPro-Semibold'" font-size="30">What will the distance vs. V plot look like?</text>
-	<g id="Q3A" display="inline">
+	<g id="Q3A" display="inherit">
 		<rect id="rect355" x="230.5" y="194.5" fill="#FFFFFF" width="340" height="181"/>
 		<g id="g357">
 			<rect id="rect359" x="242.412" y="215.032" fill="#042AB2" width="37.79" height="49.258"/>
@@ -3474,7 +3474,7 @@ gg==" transform="matrix(0.9989 0 0 0.9983 182.229 90.2295)">
 		<polygon id="polygon378" points="533.617,336.868 522.491,341.082 522.491,332.654 		"/>
 		<text id="text380" transform="matrix(1 0 0 1 346.5 357.5)" font-family="'MyriadPro-Semibold'" font-size="17">direction of propagation</text>
 	</g>
-	<g id="Q3C" display="inline">
+	<g id="Q3C" display="inherit">
 		<rect id="rect383" x="233.5" y="404.5" display="none" fill="#FFFFFF" width="359" height="181"/>
 		<g id="g385">
 			<rect id="rect387" x="243.412" y="397.667" fill="#042AB2" width="37.789" height="49.258"/>
@@ -3499,7 +3499,7 @@ gg==" transform="matrix(0.9989 0 0 0.9983 182.229 90.2295)">
 			c13.147,0.654,55.097,12.833,60.446,3.456s18.971-49.396,20.754-55.293c1.783-5.896,8.47-15.849,11.441-15.849
 			c2.971,0,13.782,44.513,20.32,55.238c2.241,3.675,6.915,7.86,6.915,7.86l52.261,1.895"/>
 	</g>
-	<g id="Q3B" display="inline">
+	<g id="Q3B" display="inherit">
 		<rect id="rect411" x="610.5" y="198.5" fill="#FFFFFF" width="332" height="202"/>
 		<g id="g413">
 			<rect id="rect415" x="622.412" y="210.032" fill="#042AB2" width="37.79" height="49.258"/>
@@ -3524,7 +3524,7 @@ gg==" transform="matrix(0.9989 0 0 0.9983 182.229 90.2295)">
 		<polygon id="polygon378_2_" points="903.617,361.868 892.491,366.082 892.491,357.654 		"/>
 		<text id="text380_2_" transform="matrix(1 0 0 1 716.5 382.5)" font-family="'MyriadPro-Semibold'" font-size="17">direction of propagation</text>
 	</g>
-	<g id="Q3D" display="inline">
+	<g id="Q3D" display="inherit">
 		<rect id="backdropD" x="608.5" y="385.5" fill="#FFFFFF" width="364" height="192"/>
 		<g id="g440">
 			<rect id="rect442" x="623.412" y="395.032" fill="#042AB2" width="37.789" height="49.258"/>
@@ -3549,7 +3549,7 @@ gg==" transform="matrix(0.9989 0 0 0.9983 182.229 90.2295)">
 			s22.866,52.363,57.866,51.682s28.109-49.682,63.555-50.682"/>
 	</g>
 	
-		<text id="Q3ChooseOne" transform="matrix(1 0 0 1 510.5 614.5)" display="inline" fill="#8E8E8E" font-family="'MyriadPro-Semibold'" font-size="30">CHOOSE ONE</text>
+		<text id="Q3ChooseOne" transform="matrix(1 0 0 1 510.5 614.5)" display="inherit" fill="#8E8E8E" font-family="'MyriadPro-Semibold'" font-size="30">CHOOSE ONE</text>
 </g>
 <g id="targetArrowSign" display="none">
 	<g id="g468" display="inline">

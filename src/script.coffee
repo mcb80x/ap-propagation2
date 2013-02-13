@@ -11,7 +11,7 @@ scene('Action Potential Generation', 'ap_propagation2') ->
         stage 'approp2',
             voltageGatedChannelsActive: true
 
-        soundtrack 'imhotep.mp3'
+        soundtrack 'neurunclomist_gathering.mp3'
         duration 10
 
         wait 50
