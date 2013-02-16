@@ -6,12 +6,15 @@
 
 scene('Action Potential Generation', 'ap_propagation2') ->
 
+    video('Getting from point A to point B') ->
+        mp4 '/video/intro_bit2.mp4'
 
     interactive('Introducing action potential propagation') ->
         stage 'approp2',
             voltageGatedChannelsActive: true
 
-        soundtrack 'neurunclomist_gathering.mp3'
+        # soundtrack 'neurunclomist_gathering.mp3'
+        soundtrack 'otomaton.mp3'
         duration 10
 
         wait 50
@@ -181,7 +184,7 @@ scene('Action Potential Generation', 'ap_propagation2') ->
             resistanceOnly: true
             R_a: 1.0
 
-        soundtrack 'imhotep.mp3'
+        soundtrack 'otomaton.mp3'
         duration 10
 
         show 'Axon', 'RecordingOscilloscope'
@@ -401,5 +404,8 @@ scene('Action Potential Generation', 'ap_propagation2') ->
 
         line 'DR-100_0213.mp3',
             "regions to the left..."
+
+    video('APP firsthand') ->
+        mp4 '/video/worms_etc.mp4'
 
         # 214-219 stimulate in the middle
