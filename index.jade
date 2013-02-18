@@ -2,18 +2,29 @@ html
 
   head
 
-    // script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js')
-    // script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js')
     script(src='http://mbostock.github.com/d3/d3.js')
     script(src='http://popcornjs.org/code/dist/popcorn-complete.min.js')
-    script(src='js/ap-debug.js')
+
+    // The compiled module code -- mcb80x libraries, simulations, etc.
+    script(src='js/approp-module-debug.js')
+
+    // The script for this lesson
+    script(src='scripts/approp.coffee', type='text/coffeescript')
+
+    // Main
+    script(src='scripts/main.coffee', type='text/coffeescript')
+
+    // Coffeescript compiler (included here to compile the above two scripts.
+    // In a "live" version, these would be pre-compiled)
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.1.2/coffee-script.min.js')
+
 
     link(rel='stylesheet', type='text/css', href='css/jquery-ui-1.9.2.custom.css')
     link(rel='stylesheet', type='text/css', href='css/mcb80x.css')
     link(rel='stylesheet', type='text/css', href='css/tipsy.css')
 
-  body
 
+  body
 
     #stage
       #prompt_overlay
@@ -22,18 +33,18 @@ html
 
         #art
 
-        #floaty.properties-pane(data-bind="visible: propertiesVisible", style="display: none;")
+        #floaty.properties-pane(data-bind='visible: propertiesVisible', style='display: none;')
           div(data-bind='visible: R_a_knob')
             label Axial Resistance:
               span(data-bind='text: R_a')
             br
-            div(data-bind="slider: R_a, sliderOptions: {min: 0.35, max: 3.0, range: false, step: 0.05}")
+            div(data-bind='slider: R_a, sliderOptions: {min: 0.35, max: 3.0, range: false, step: 0.05}')
 
           div(data-bind='visible: C_m_knob')
             label Membrane Capacitance:
               span(data-bind='text: C_internode')
             br
-            div#CSlider(data-bind="slider: C_internode, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}")
+            div#CSlider(data-bind='slider: C_internode, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}')
 
           //- label Pulse Current:
           //-   span(data-bind='text: pulseAmplitude')
@@ -48,10 +59,14 @@ html
           //- input(type='checkbox', data-bind='checked: voltageClamped')
 
 
-      #video(style="display:none;")
-        video(height='100%', width='100%', id="vid")
-      .timeline-controls
-        //- button.timeline-play
+      #video(style='display:none;')
+        video(height='100%', width='100%', id='vid')
+
+      #timeline-controls
+        button.timeline-button(data-bind='visible: paused, click: play')
+          img(src='images/play.png', height='100%', width='100%')
+        button.timeline-button(data-bind='visible: playing, click: pause')
+          img(src='images/pause.png', height='100%', width='100%')
         #timeline.timeline-container
 
 

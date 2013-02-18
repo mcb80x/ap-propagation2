@@ -9,7 +9,8 @@ toast 'src'
             'common/third-party/knockout-2.2.0.js',
             'common/third-party/jquery-ui-1.9.2.custom.js',
             'common/third-party/jquery.tipsy.js',
-            'common/third-party/soundmanager2.js']
+            'common/third-party/buzz.js']
+            # 'common/third-party/soundmanager2.js']
 
   # => OPTIONS (optional, default values listed)
   # bare: false
@@ -19,5 +20,5 @@ toast 'src'
 
   # => HTTPFOLDER (optional), RELEASE / DEBUG (required)
   httpfolder: 'js'
-  release: 'www/js/ap.js'
-  debug: 'www/js/ap-debug.js'
+  release: 'www/js/approp-module.js'
+  debug: 'www/js/approp-module-debug.js'

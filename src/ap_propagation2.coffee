@@ -6,9 +6,10 @@
 #<< mcb80x/bindings
 #<< mcb80x/oscilloscope
 #<< mcb80x/sim/linear_compartment
-#<< mcb80x/properties
+#<< mcb80x/interactive_svg
 #<< mcb80x/sim/stim
 #<< mcb80x/lesson_plan
+#<< mcb80x/timeline
 
 
 class ApPropagation2 extends mcb80x.InteractiveSVG
@@ -136,7 +137,6 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
                 @iterations += 1
         )
 
-
         # Questions
         svgbind.bindMultipleChoice(
             '#Q1A': 'a'
@@ -166,7 +166,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # Set the html-based Knockout.js bindings in motion
         # This will allow templated 'data-bind' directives to automagically control the simulation / views
 
-        ko.applyBindings(this)
+        ko.applyBindings(this, $('#interactive')[0])
 
         # ------------------------------------------------------
         # Plotting
