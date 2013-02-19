@@ -55,6 +55,9 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @sim = undefined
         @pulse = undefined
 
+        @oscopes = []
+
+
     connectStimulator: ->
 
         # Stimulator
@@ -173,7 +176,6 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # ------------------------------------------------------
 
         # Oscilloscopes
-        @oscopes = []
         @oscopes.push oscilloscope('#art svg', '#oscope1')
 
         oscopeCompartment = @sim.compartments[24]
@@ -274,9 +276,12 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
 
         @updateTimer = setInterval(update, 10)
 
+    reset: ->
+        @stop()
+
     stop: ->
         clearInterval(@updateTimer) if @updateTimer
-        @sim.reset()
+        @sim.reset() if (@sim and @sim.reset?)
         scope.reset() for scope in @oscopes
 
 
