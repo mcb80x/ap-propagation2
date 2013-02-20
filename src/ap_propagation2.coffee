@@ -283,16 +283,22 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @updateTimer = setInterval(update, 10)
 
     reset: ->
-        @stop()
-
+        # @stop()
         @oscopes = []
         # @init()
 
     stop: ->
-        clearInterval(@updateTimer) if @updateTimer
-        @sim.reset() if (@sim and @sim.reset?)
-        scope.reset() for scope in @oscopes
+        dfrd = $.Deferred()
 
+        stopit = =>
+            clearInterval(@updateTimer) if @updateTimer
+            @sim.reset() if (@sim and @sim.reset?)
+            scope.reset() for scope in @oscopes
+            dfrd.resolve()
+
+        setTimeout(stopit, 0)
+
+        return dfrd
 
 
 
