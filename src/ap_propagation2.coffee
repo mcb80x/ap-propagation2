@@ -72,7 +72,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         stimCompartment.clampVoltage(@clampVoltage)
 
 
-    init: ->
+    initInteractive: ->
 
         # ----------------------------------------------------
         # Set up the simulation
@@ -176,6 +176,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # ------------------------------------------------------
 
         # Oscilloscopes
+        @oscopes = []
         @oscopes.push oscilloscope('#art svg', '#oscope1')
 
         oscopeCompartment = @sim.compartments[24]
@@ -255,6 +256,11 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
 
 
 
+    show: ->
+        dfrd = super()
+
+        return dfrd.then(=> @initInteractive())
+
 
     hide: (cb) ->
         @propertiesVisible(false)
@@ -278,6 +284,9 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
 
     reset: ->
         @stop()
+
+        @oscopes = []
+        # @init()
 
     stop: ->
         clearInterval(@updateTimer) if @updateTimer

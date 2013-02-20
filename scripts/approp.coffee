@@ -51,51 +51,51 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
             ->
                 show 'Stimulator'
 
-        # wait 250
-        # show 'HodgkinAndHuxley'
-        # line 'DR-100_0131.mp3',
-        #     "This isn't far off from ..."
-        # hide 'HodgkinAndHuxley'
+        wait 250
+        show 'HodgkinAndHuxley'
+        line 'DR-100_0131.mp3',
+            "This isn't far off from ..."
+        hide 'HodgkinAndHuxley'
 
-        # line 'DR-100_0133.mp3',
-        #     "But first, let's get a flavor for ..."
+        line 'DR-100_0133.mp3',
+            "But first, let's get a flavor for ..."
 
-        # line 'DR-100_0134.mp3',
-        #     "In a moment, you'll ... but first, let's make a prediction"
+        line 'DR-100_0134.mp3',
+            "In a moment, you'll ... but first, let's make a prediction"
 
 
-        # # Question 1!
-        # hide 'Q1A', 'Q1B', 'Q1C', 'Q1D', 'Q1ChooseOne'
-        # show 'Q1'
+        # Question 1!
+        hide 'Q1A', 'Q1B', 'Q1C', 'Q1D', 'Q1ChooseOne'
+        show 'Q1'
 
-        # line 'DR-100_0135.mp3',
-        #     "Will we see..."
+        line 'DR-100_0135.mp3',
+            "Will we see..."
 
-        # show 'Q1A'
-        # line 'DR-100_0137.mp3',
-        #     "a ..."
+        show 'Q1A'
+        line 'DR-100_0137.mp3',
+            "a ..."
 
-        # show 'Q1B'
-        # line 'DR-100_0138.mp3',
-        #     "b ..."
+        show 'Q1B'
+        line 'DR-100_0138.mp3',
+            "b ..."
 
-        # show 'Q1C'
-        # line 'DR-100_0139.mp3',
-        #     "c ..."
+        show 'Q1C'
+        line 'DR-100_0139.mp3',
+            "c ..."
 
-        # show 'Q1D'
-        # line 'DR-100_0140.mp3',
-        #     "d ..."
+        show 'Q1D'
+        line 'DR-100_0140.mp3',
+            "d ..."
 
-        # show 'Q1ChooseOne'
+        show 'Q1ChooseOne'
 
-        # choice 'Q1'
+        choice 'Q1'
 
-        # hide 'Q1'
-        # wait 500
+        hide 'Q1'
+        wait 500
 
-        # line 'DR-100_0141.mp3',
-        #     "As before, we've slowed down..."
+        line 'DR-100_0141.mp3',
+            "As before, we've slowed down..."
 
         play '*'
 
@@ -137,11 +137,10 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
         duration 5
 
         line 'DR-100_0147.mp3',
-            "Equivalent circuit looks more like this",
-            ->
-                show 'membraneCircuit'
-                show 'extracellularResistance'
-                show 'intracellularResistance'
+            "Equivalent circuit looks more like this"
+
+        show 'membraneCircuit', 'extracellularResistance',
+             'intracellularResistance'
 
 
         line 'DR-100_0149.mp3',
