@@ -58,8 +58,9 @@ html
           //- input(type='checkbox', data-bind='checked: voltageClamped')
 
 
-      #video(style='display:none;')
-        video(height='100%', width='100%', id='vid')
+      #video()
+        .blocker
+        //- video(height='100%', width='100%', id='vid')
 
       #timeline-controls
         button.timeline-button(data-bind='visible: paused, click: play')

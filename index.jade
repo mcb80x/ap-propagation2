@@ -6,7 +6,7 @@ html
     script(src='http://popcornjs.org/code/dist/popcorn-complete.min.js')
 
     // The compiled module code -- mcb80x libraries, simulations, etc.
-    script(src='js/approp-module-debug.js')
+    script(src='js/approp-module.js')
 
     // The script for this lesson
     script(src='scripts/approp.coffee', type='text/coffeescript')
@@ -58,8 +58,8 @@ html
           //- input(type='checkbox', data-bind='checked: voltageClamped')
 
 
-      #video(style='display:none;')
-        video(height='100%', width='100%', id='vid')
+      #video
+        .blocker
 
       #timeline-controls
         button.timeline-button(data-bind='visible: paused, click: play')

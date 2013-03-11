@@ -4,9 +4,12 @@ console.log('running script')
 
 scene('Action Potential Generation', 'action_potential_propagation_p1') ->
 
-    # video('Getting from point A to point B') ->
-    #     mp4 '/video/intro_bit2.mp4'
-    #     m4v '/video/intro_bit2.m4v'
+
+    video('Getting from point A to point B') ->
+        #vimeo '17950038'
+        youtube 'nPoIclyb_4Q'
+        mp4 '/video/intro_bit2.mp4'
+        m4v '/video/intro_bit2.m4v'
 
     interactive('Introducing action potential propagation') ->
         stage 'approp2',
@@ -14,7 +17,7 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
 
         # soundtrack 'neurunclomist_gathering.mp3'
         soundtrack 'otomaton.mp3'
-        duration 10
+        duration 30
 
         wait 50
 
@@ -124,7 +127,7 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
 
     interactive('Comparing action potential propagation to wires') ->
         stage 'coming_soon.svg'
-        duration 5
+        duration 10
 
         line 'DR-100_0145.mp3',
             "If you're used to thinking about wires..."
@@ -134,7 +137,7 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
 
     interactive('Axon equivalent circuit diagram') ->
         stage 'axon_equivalent_circuit.svg'
-        duration 5
+        duration 20
 
         line 'DR-100_0147.mp3',
             "Equivalent circuit looks more like this"
@@ -183,7 +186,7 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
             R_a: 1.0
 
         soundtrack 'otomaton.mp3'
-        duration 10
+        duration 30
 
         show 'Axon', 'RecordingOscilloscope'
 
@@ -403,7 +406,11 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
         line 'DR-100_0213.mp3',
             "regions to the left..."
 
-    # video('APP firsthand') ->
-    #     mp4 '/video/worms_etc.mp4'
+
+    video('Action Potentials in Real Life') ->
+        youtube 'PAtZAKujtqI'
+        #vimeo 'http://vimeo.com/60091613'
+        vimeo '60091613'
+        mp4 '/video/worms_etc.mp4'
 
         # 214-219 stimulate in the middle
