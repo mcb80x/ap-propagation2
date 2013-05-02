@@ -20,4 +20,4 @@ def static(path):
     print 'serving ' + path + '....'
     return static_file(path, root='www')
 
-run(host='localhost', port=8080)
+run(host='localhost', port=8080, server='cherrypy')

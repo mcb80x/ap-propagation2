@@ -7,9 +7,10 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
 
     video('Getting from point A to point B') ->
         #vimeo '17950038'
-        youtube 'nPoIclyb_4Q'
-        mp4 '/video/intro_bit2.mp4'
-        m4v '/video/intro_bit2.m4v'
+        # youtube 'nPoIclyb_4Q'
+        # mp4 '/video/intro_bit2.mp4'
+        # m4v '/video/intro_bit2.m4v'
+        mp4 'http://player.vimeo.com/external/65254623.hd.mp4?s=7cc8f6ef13456455382308c2794345d8'
 
     interactive('Introducing action potential propagation') ->
         stage 'approp2',
@@ -408,9 +409,10 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
 
 
     video('Action Potentials in Real Life') ->
-        youtube 'PAtZAKujtqI'
+        # youtube 'PAtZAKujtqI'
         #vimeo 'http://vimeo.com/60091613'
-        vimeo '60091613'
-        mp4 '/video/worms_etc.mp4'
+        # vimeo '60091613'
+        # mp4 '/video/worms_etc.mp4'
+        mp4 'http://player.vimeo.com/external/65254622.hd.mp4?s=28e0293cbe56dd10b4b9168e02bac5db'
 
         # 214-219 stimulate in the middle

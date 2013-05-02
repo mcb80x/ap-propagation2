@@ -19,7 +19,25 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         # Defer SVG marionetting stuff to base class
         super('svg/ap_propagation2.svg')
 
-        # Some knockout.js custom bindings to marionette the interactive
+        @duration = ko.observable 10.0 # an estimate
+
+        @XVPlotVRange = [-80, 50]
+
+        # ------------------------------------------------------
+        # Simulation components
+        # ------------------------------------------------------
+
+        @sim = undefined
+        @pulse = undefined
+
+        @oscopes = []
+
+        @initializeProperties()
+
+
+    initializeProperties: ->
+
+       # Some knockout.js custom bindings to marionette the interactive
 
         # what kind of simulation
         @myelinated = ko.observable false
@@ -28,13 +46,10 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @voltageClamped = ko.observable false
         @activeStimCompartmentOnly = ko.observable false
 
-        @duration = ko.observable 10.0 # an estimate
         @stimCompartmentIndex = ko.observable 0 # which compartment to stimulate
 
         @clampVoltage = ko.observable -65.0
         @pulseAmplitude = ko.observable 180.0
-
-        @XVPlotVRange = [-80, 50]
 
         # show or hide the properties panel
         @propertiesVisible = ko.observable false
@@ -47,15 +62,6 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
         @nextButton = ko.observable false
         @R_a_knob = ko.observable false
         @C_m_knob = ko.observable false
-
-        # ------------------------------------------------------
-        # Simulation components
-        # ------------------------------------------------------
-
-        @sim = undefined
-        @pulse = undefined
-
-        @oscopes = []
 
 
     connectStimulator: ->
@@ -285,7 +291,9 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
     reset: ->
         # @stop()
         @oscopes = []
-        # @init()
+
+        @initializeProperties()
+        @initializeInteractive()
 
     stop: ->
         dfrd = $.Deferred()
