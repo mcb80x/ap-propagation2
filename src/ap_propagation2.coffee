@@ -216,7 +216,7 @@ class ApPropagation2 extends mcb80x.InteractiveSVG
 
 
     updateSimulationParameters: ->
-        console.log('updating simulation')
+        # console.log('updating simulation')
 
         if @myelinated()
             @sim.passiveInternodes(true)

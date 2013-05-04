@@ -10,4 +10,4 @@ $ ->
 	timeline = new mcb80x.Timeline('#timeline-controls', sceneController)
 
 	# set the scene in motion
-	sceneController.run()
+	sceneController.startRunLoop()
