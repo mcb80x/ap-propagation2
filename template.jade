@@ -27,54 +27,54 @@ html
   body
 
 
-    .wrapper
-      .sixteen-by-nine.aspect-ratio
-        #stage.content
+    //- .wrapper
+    //-   .sixteen-by-nine.aspect-ratio
+    //-     #stage.content
+    #stage.autosize
+      #interactive
+        #art
 
-          #interactive
-            #art
+        #floaty.properties-pane(data-bind='visible: propertiesVisible', style='display: none;')
+          div(data-bind='visible: R_a_knob')
+            label Axial Resistance:
+              span(data-bind='text: R_a')
+            br
+            div(data-bind='slider: R_a, sliderOptions: {min: 0.35, max: 3.0, range: false, step: 0.05}')
 
-            #floaty.properties-pane(data-bind='visible: propertiesVisible', style='display: none;')
-              div(data-bind='visible: R_a_knob')
-                label Axial Resistance:
-                  span(data-bind='text: R_a')
-                br
-                div(data-bind='slider: R_a, sliderOptions: {min: 0.35, max: 3.0, range: false, step: 0.05}')
+          div(data-bind='visible: C_m_knob')
+            label Membrane Capacitance:
+              span(data-bind='text: C_internode')
+            br
+            div#CSlider(data-bind='slider: C_internode, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}')
 
-              div(data-bind='visible: C_m_knob')
-                label Membrane Capacitance:
-                  span(data-bind='text: C_internode')
-                br
-                div#CSlider(data-bind='slider: C_internode, sliderOptions: {min: 0.4, max: 1.5, range: false, step: 0.1}')
+          //- label Pulse Current:
+          //-   span(data-bind='text: pulseAmplitude')
+          //- br
+          //- div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 200.0, range: false, step: 10}")
 
-              //- label Pulse Current:
-              //-   span(data-bind='text: pulseAmplitude')
-              //- br
-              //- div(data-bind="slider: pulseAmplitude, sliderOptions: {min: 100, max: 200.0, range: false, step: 10}")
+          //- label Myelinated:
+          //- input(type='checkbox', data-bind='checked: myelinated')
 
-              //- label Myelinated:
-              //- input(type='checkbox', data-bind='checked: myelinated')
-
-              //- br
-              //- label Voltage Clamped:
-              //- input(type='checkbox', data-bind='checked: voltageClamped')
-
-
-          #video()
-
-          #title-banner.lower-third
-            span.lower-third-title Getting from point A to point B
-
-          #timeline-controls
-            button.timeline-button(data-bind='visible: paused, click: play')
-              img(src='images/play.png', height='100%', width='100%')
-            button.timeline-button(data-bind='visible: playing, click: pause')
-              img(src='images/pause.png', height='100%', width='100%')
-            #timeline.timeline-container
+          //- br
+          //- label Voltage Clamped:
+          //- input(type='checkbox', data-bind='checked: voltageClamped')
 
 
-          #loading-indicator.loading-indicator
-            img.loading-icon(src='images/loading.gif')
+      #video()
 
-          img.logo-overlay(src='images/logo_overlay.png')
+      #title-banner.lower-third
+        span.lower-third-title Getting from point A to point B
+
+      #timeline-controls
+        button.timeline-button(data-bind='visible: paused, click: play')
+          img(src='images/play.png', height='100%', width='100%')
+        button.timeline-button(data-bind='visible: playing, click: pause')
+          img(src='images/pause.png', height='100%', width='100%')
+        #timeline.timeline-container
+
+
+      #loading-indicator.loading-indicator
+        img.loading-icon(src='images/loading.gif')
+
+      img.logo-overlay(src='images/logo_overlay.png')
 
