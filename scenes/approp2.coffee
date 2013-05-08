@@ -1,8 +1,6 @@
 # Script
 
-console.log('running script')
-
-scene('Action Potential Generation', 'action_potential_propagation_p1') ->
+scene('Getting from here to there', 'approp2') ->
 
 
     video('Getting from point A to point B') ->
@@ -407,8 +405,7 @@ scene('Action Potential Generation', 'action_potential_propagation_p1') ->
         line 'DR-100_0213.mp3',
             "regions to the left..."
 
-
-    video('Action Potentials in Real Life') ->
+   video('Action Potentials in Real Life') ->
         # youtube 'PAtZAKujtqI'
         #vimeo 'http://vimeo.com/60091613'
         # vimeo '60091613'

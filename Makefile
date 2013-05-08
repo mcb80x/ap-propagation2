@@ -1,11 +1,11 @@
-.PHONY: svg dir css swf audio video scripts images
+.PHONY: svg dir css swf audio video scenes images
 
 JADE_FILES=${wildcard *.jade}
 COFFEE_FILES=${wildcard scripts/*.coffee}
 CSS_FILES=${wildcard css/*.css}
 SVG_FILES=${wildcard art/*.svg}
 
-all: html js svg css swf audio video scripts images
+all: html js svg css swf audio video scenes images
 
 css: ${CSS_FILES}
 	mkdir -p www/css
@@ -37,9 +37,10 @@ svg:
 	mkdir -p www/svg
 	cp art/*.* www/svg/
 
-scripts:
-	rm -rf www/scripts
-	cd www; ln -s ../scripts scripts
+scenes:
+	mkdir -p www/scenes
+	cp scenes/* www/scenes
+	coffee -c www/scenes/
 
 swf:
 	mkdir -p www/swf
