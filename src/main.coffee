@@ -5,9 +5,11 @@ $ ->
 	sceneList = [
 		{
 			name: 'approp2'
+			title: 'Getting from Point A to Point B'
 		},
 		{
 			name: 'approp3'
+			title: 'Giant Axons'
 		}
 	]
 

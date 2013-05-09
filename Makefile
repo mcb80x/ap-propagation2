@@ -11,6 +11,7 @@ css: ${CSS_FILES}
 	mkdir -p www/css
 	cp -r css/* www/css/
 	cp -r common/css/* www/css
+	lessc www/css/mcb80x.less www/css/mcb80x.css
 
 html: ${JADE_FILES}
 	jade --out www/ .
